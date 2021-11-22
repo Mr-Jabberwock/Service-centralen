@@ -1,34 +1,72 @@
 <template>
 <div>
     <Header />
+    <div>
+        <input type="file" @change="uploadedFile" />
+    </div>
     <ul :style="gridStyle" class="company">
-        <li v-for="company in companies" :key="company" class="company__details">
+        <li v-for="company in toBeShown" :key="company" class="company__details">
             <p>Comapny {{company.company}}</p>
+            <p> {{company.amount}}</p>
         </li>
     </ul>
+    <div>
+        <button class="load-button" @click="increasePage">Indlæs 8 mere</button>
+    </div>
 </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue"
+import XLSX from "xlsx"
 export default{
    name: 'Companies',
    data(){
        return{
-           companies: [
-               {company: "comapny 1"},
-               {company: "comapny 2"},
-               {company: "comapny 3"},
-               {company: "comapny 4"},
-               {company: "comapny 5"},
-               {company: "comapny 6"},
-               {company: "comapny 7"},
-               {company: "comapny 8"}
-           ]
+           companies: [],
+           currentPage: 1,
+           file: ""
        }
    },
    components: {
       Header
+   },
+   computed: {
+       toBeShown(){
+           return this.companies.slice(0, this.currentPage * 4)
+       }
+   },
+   methods: {
+       increasePage(){
+           this.currentPage++
+       },
+       uploadedFile(event){
+           this.file = event.target.files[0]
+           const reader = new FileReader();
+           reader.onload = (e) => {
+                /* Parse data */
+                const bstr = e.target.result;
+                const wb = XLSX.read(bstr, { type: 'binary' });
+                
+                /* Get first worksheet */
+                const wsname = wb.SheetNames[0];
+                const ws = wb.Sheets[wsname];
+                /* Convert array of arrays */
+                const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                
+                var objs = data.map(function(x) { 
+                    return { 
+                        company: x[0], 
+                        amount: x[1] 
+                    }; 
+                });
+                console.log(objs);
+                this.companies = objs
+
+            }  
+           reader.readAsBinaryString(this.file);
+        
+       }
    }
 }
 </script>
@@ -50,12 +88,22 @@ export default{
     }
 }
 
+.load-button{
+    width: 80%;
+    height: 50px;
+}
+
 @media only screen and (min-width: 1000px){
     .company{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 50px 0px;
         
+    }
+
+    .load-button{
+        width: 90%;
+        margin-top: 100px;
     }
 
 }
