@@ -17,8 +17,19 @@
             <option>2016</option>
         </select>
     </div>
+    <transition name="pop" appear>
+        <div >
+            <CompanyDetails :class="[{visible: companyOpen}]"></CompanyDetails>
+        </div>
+    </transition>
+    <transition name="fade" appear>
+        <div class="modal-overlay" 
+            v-show="companyOpen" 
+            @click="companyOpen= false">
+        </div>
+    </transition>    
     <ul  class="company">
-        <li v-for="company in toBeShown" :key="company.invoice" >
+         <li v-for="company in toBeShown" :key="company.invoice" @click="openCompany(company)">
             <div class="company__details"
                  :class="[company.price < company.year2 && company.year2 < company.year1 ? 'red' : 'green',
                  company.price < company.year2 ? 'yellow' : 'green']"
@@ -39,6 +50,7 @@
 <script>
 import Header from "../components/Header.vue"
 import XLSX from "xlsx"
+import CompanyDetails from "../components/CompanyDetails.vue"
 export default{
    name: 'Companies',
    data(){
@@ -49,11 +61,13 @@ export default{
            currentPage: 1,
            file: "",
            filter: "Største",
+           companyOpen: false,
            searchYear: 2021
        }
    },
    components: {
-      Header
+      Header,
+      CompanyDetails
    },
    computed: {
        toBeShown(){
@@ -61,6 +75,11 @@ export default{
        }
    },
    methods: {
+       openCompany(obj){
+           this.companyOpen = true;
+           this.$store.commit("SET_COMPANY_OBJECT", obj);
+           console.log(obj);
+       },
        increasePage(){
            this.currentPage++
        },
@@ -150,6 +169,5 @@ export default{
 </script>
 
 <style lang="scss">
-
 @import "../assets/styles/companies";
 </style>
