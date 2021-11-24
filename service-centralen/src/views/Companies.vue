@@ -20,7 +20,8 @@
     <ul  class="company">
         <li v-for="company in toBeShown" :key="company.invoice" >
             <div class="company__details"
-                 :class="company.price > company.year2 ? 'yellow' : 'green'"
+                 :class="[company.price < company.year2 && company.year2 < company.year1 ? 'red' : 'green', company.price < company.year2 ? 'yellow' : 'green']"
+                  
             >
                 <p>Comapny {{company.address}}  </p>
                 <p> {{company.price}}</p>
@@ -88,31 +89,8 @@ export default{
                 
                 this.invoices = objs;
 
-                const result = [];
-                for(var i = 0; i < this.invoices.length; i++){
-                    var el = this.invoices[i];
-                    if(!result.some(invoice => invoice.companyId === el.companyId)){
-                        result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0 })
-                    }
-                    
-                    const year = el.date.toString().substring(6,10);
-                    const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
-                    if(result.some(invoice => invoice.companyId === el.companyId)){
-                        result[elementPos].price += el.price
-
-                        if(this.searchYear -1 === parseInt(year)){
-                            result[elementPos].year2 += el.price
-                        }
-
-                        if(this.searchYear -2 === parseInt(year)){
-                            result[elementPos].year1 += el.price
-                        }
-                    }
-                }
-
-                console.log(result)
-
-                this.companies = result   
+                
+                this.sortByYear();  
 
             }  
            reader.readAsBinaryString(this.file);
@@ -125,14 +103,22 @@ export default{
              for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
                 if(!result.some(invoice => invoice.companyId === el.companyId)){
-                    result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0 })
+                    result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0 })
                 }
                     
                 const year = el.date.toString().substring(6,10);
                 const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
                 if(result.some(invoice => invoice.companyId === el.companyId)){
-                    if(this.searchYear == year){
+                    if(this.searchYear == parseInt(year)){
                         result[elementPos].price += el.price
+                    }
+
+                    if(this.searchYear -1 === parseInt(year)){
+                        result[elementPos].year2 += el.price
+                    }
+
+                    if(this.searchYear -2 === parseInt(year)){
+                        result[elementPos].year1 += el.price
                     }
                 }        
             }
@@ -172,6 +158,10 @@ export default{
 
 .yellow{
     background-color: yellow;
+}
+
+.red {
+     background-color: red;
 }
 
 .load-button{
