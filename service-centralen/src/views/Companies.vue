@@ -20,7 +20,8 @@
     <ul  class="company">
         <li v-for="company in toBeShown" :key="company.invoice" >
             <div class="company__details"
-                 :class="[company.price < company.year2 && company.year2 < company.year1 ? 'red' : 'green', company.price < company.year2 ? 'yellow' : 'green']"
+                 :class="[company.price < company.year2 && company.year2 < company.year1 ? 'red' : 'green',
+                 company.price < company.year2 ? 'yellow' : 'green']"
                   
             >
                 <p>Comapny {{company.address}}  </p>
@@ -47,7 +48,7 @@ export default{
            filteredCompanies: [],
            currentPage: 1,
            file: "",
-           filter: "",
+           filter: "Største",
            searchYear: 2021
        }
    },
@@ -122,13 +123,26 @@ export default{
                     }
                 }        
             }
+            
 
             this.companies = result 
 
+            this.filterResults();
+
             
        },
-
        filterResults(){
+           if(this.filter == "Mindste"){
+               this.companies.sort((a,b) => a.price - b.price);
+           }
+           if(this.filter == "Største"){
+               this.companies.sort((a,b) => b.price - a.price);
+           }
+           if(this.filter == "Røde"){
+               this.companies.sort((a) =>{
+                   if(a.price < a.year2 && a.year2 < a.year1) return -1
+               })
+           }
          
        }
    }
@@ -137,51 +151,5 @@ export default{
 
 <style lang="scss">
 
-.company{
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    .company__details{
-        width: 80%;
-        height: 50px;
-        margin-top: 20px;
-        margin-left: 10%;
-
-        display: flex;
-        
-    }
-}
-
-.green{
-    background-color: green;
-}
-
-.yellow{
-    background-color: yellow;
-}
-
-.red {
-     background-color: red;
-}
-
-.load-button{
-    width: 80%;
-    height: 50px;
-}
-
-@media only screen and (min-width: 1000px){
-    .company{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 50px 0px;
-        
-    }
-
-    .load-button{
-        width: 90%;
-        margin-top: 100px;
-    }
-
-}
-
+@import "../assets/styles/companies";
 </style>

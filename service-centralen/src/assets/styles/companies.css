@@ -1,0 +1,52 @@
+.company {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 0px;
+}
+
+.company .company__details {
+  width: 80%;
+  height: 50px;
+  margin-top: 20px;
+  margin-left: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.red {
+  background-color: red;
+}
+
+.load-button {
+  width: 80%;
+  height: 50px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .company {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    gap: 50px 0px;
+  }
+  .load-button {
+    width: 90%;
+    margin-top: 100px;
+  }
+}
+/*# sourceMappingURL=companies.css.map */
