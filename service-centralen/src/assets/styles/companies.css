@@ -17,6 +17,17 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.red {
   background-color: red;
 }
 
