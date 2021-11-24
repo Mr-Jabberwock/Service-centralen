@@ -5,13 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    companyPurchases: []
+    companyPurchases: [],
+    companyObj: {
+      amount: "",
+      name: ""
+    }
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
       state.companyPurchases = payload
       console.log(state.companyPurchases)
 
+    },
+    SET_COMPANY_OBJECT(state, res){
+      state.companyObj.amount = res.amount;
+      state.companyObj.name = res.company;
     }
   },
   actions: {
@@ -22,5 +30,10 @@ export default new Vuex.Store({
     }
   },
   modules: {
+  },
+  getters: {
+    getCompanyObj(state){
+      return state.companyObj;
+    }
   }
 })

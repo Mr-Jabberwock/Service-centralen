@@ -4,9 +4,20 @@
     <div>
         <input type="file" @change="uploadedFile" />
     </div>
+    <transition name="pop" appear>
+        <div >
+            <CompanyDetails :class="[{visible: companyOpen}]"></CompanyDetails>
+        </div>
+    </transition>
+    <transition name="fade" appear>
+        <div class="modal-overlay" 
+            v-show="companyOpen" 
+            @click="companyOpen= false">
+        </div>
+    </transition>
     <ul :style="gridStyle" class="company">
-        <li v-for="company in toBeShown" :key="company" class="company__details">
-            <p>Comapny {{company.company}}</p>
+        <li v-for="company in toBeShown" :key="company" class="company__details" @click="openCompany(company)">
+            <p>Company {{company.company}}</p>
             <p> {{company.amount}}</p>
         </li>
     </ul>
@@ -19,17 +30,20 @@
 <script>
 import Header from "../components/Header.vue"
 import XLSX from "xlsx"
+import CompanyDetails from "../components/CompanyDetails.vue"
 export default{
    name: 'Companies',
    data(){
        return{
            companies: [],
            currentPage: 1,
-           file: ""
+           file: "",
+           companyOpen: false
        }
    },
    components: {
-      Header
+      Header,
+      CompanyDetails
    },
    computed: {
        toBeShown(){
@@ -37,6 +51,11 @@ export default{
        }
    },
    methods: {
+       openCompany(obj){
+           this.companyOpen = true;
+           this.$store.commit("SET_COMPANY_OBJECT", obj);
+           console.log(obj);
+       },
        increasePage(){
            this.currentPage++
        },
@@ -72,40 +91,5 @@ export default{
 </script>
 
 <style lang="scss">
-
-.company{
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    .company__details{
-        width: 80%;
-        height: 50px;
-        margin-top: 20px;
-        margin-left: 10%;
-
-        display: flex;
-        background-color: red;
-    }
-}
-
-.load-button{
-    width: 80%;
-    height: 50px;
-}
-
-@media only screen and (min-width: 1000px){
-    .company{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 50px 0px;
-        
-    }
-
-    .load-button{
-        width: 90%;
-        margin-top: 100px;
-    }
-
-}
 
 </style>
