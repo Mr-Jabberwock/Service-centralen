@@ -30,6 +30,45 @@
     height: 50px;
 }
 
+.import-filter{
+    margin-top: 10%;
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+
+    justify-content: space-between;
+
+    .import-filter__categories, .import-filter__years{
+        margin-right: 20px;
+        padding: 10px;
+
+    }
+
+    .import-filter__filters{
+        input{
+            padding: 10px;
+        }
+    }
+
+    .import-filter__picker{
+        .upload-label{
+            border: 1px solid black;
+            display: inline-block;
+            padding: 10px;
+
+            input[type="file"] {
+                display: none;
+            }
+            
+        }
+        
+    }
+}
+
+ul {
+    list-style-type: none;
+}
+
 @media only screen and (min-width: 1000px){
     .company{
         display: grid;
@@ -41,6 +80,15 @@
     .load-button{
         width: 90%;
         margin-top: 100px;
+    }
+
+    .import-filter{
+        margin-top: 5%; 
+
+        margin-left: 5%;
+        width: 90%;
+
+        
     }
 
 }

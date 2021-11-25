@@ -1,6 +1,6 @@
 <template>
-   <div>
-       <div class="header">
+   <div class="header">
+       <div class="header__content">
            <div class="logo">LOGO</div>
            <div>Firmaer</div>
            <div>Statestikker</div>
@@ -16,23 +16,5 @@ export default{
 </script>
 
 <style lang="scss">
-.header{
-    width: 100%;
-    height: 50px;
-    background-color: black;
-    opacity: 70%;
-
-    display: flex;
-
-    .logo{
-        margin-left: 10px;
-        margin-top: 0;
-    }
-
-    
-}
-
-    @media only screen and (max-width: 786){
-
-    }
+@import "../assets/styles/header";
 </style>

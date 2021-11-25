@@ -1,21 +1,30 @@
 <template>
 <div>
     <Header />
-    <div>
-        <input type="file" @change="uploadFile" />
-        <select v-model="filter" @change="filterResults">
-            <option>Største</option>
-            <option>Mindste</option>
-            <option>Røde</option>
-        </select>
-        <select v-model="searchYear" @change="sortByYear">
-            <option>2021</option>
-            <option>2020</option>
-            <option>2019</option>
-            <option>2018</option>
-            <option>2017</option>
-            <option>2016</option>
-        </select>
+    <div class="import-filter">
+        <div class="import-filter__picker">
+            <label class="upload-label">
+                Upload fil
+                <input type="file" @change="uploadFile" />
+            </label>
+            
+        </div>
+        <div class="import-filter__filters">
+            <select class="import-filter__categories" v-model="filter" @change="filterResults">
+                <option>Største</option>
+                <option>Mindste</option>
+                <option>Røde</option>
+            </select>
+            <select class="import-filter__years" v-model="searchYear" @change="sortByYear">
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+            </select>
+            <input type="text" v-model="search" v-on:input="searchFilter"/>
+        </div>
     </div>
     <transition name="pop" appear>
         <div >
@@ -40,7 +49,7 @@
             </div>
         </li>
     </ul>
-    <div>
+    <div class="bottom-image">
         <button class="load-button" @click="increasePage">Indlæs 8 mere</button>
     </div>
 
@@ -62,7 +71,8 @@ export default{
            file: "",
            filter: "Største",
            companyOpen: false,
-           searchYear: 2021
+           searchYear: 2021,
+           search: ""
        }
    },
    components: {
@@ -163,6 +173,11 @@ export default{
                })
            }
          
+       },
+       searchFilter(){
+           console.log(this.companies.filter(comapny => {
+               comapny.address.includes(this.search)
+           }))
        }
    }
 }
