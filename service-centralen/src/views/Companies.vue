@@ -23,7 +23,7 @@
                 <option>2017</option>
                 <option>2016</option>
             </select>
-            <input type="text" v-model="search" v-on:input="searchFilter"/>
+            <input class="import-filter__search" type="text" v-model="search" v-on:input="searchFilter"/>
         </div>
     </div>
     <transition name="pop" appear>
@@ -44,8 +44,8 @@
                  company.price < company.year2 ? 'yellow' : 'green']"
                   
             >
-                <p>Comapny {{company.address}}  </p>
-                <p> {{company.price}}</p>
+                <p class="company__address">Firma {{company.address}}  </p>
+                <p class="company__amount"> {{company.price}}</p>
             </div>
         </li>
     </ul>
