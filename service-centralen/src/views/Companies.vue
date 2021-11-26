@@ -19,13 +19,13 @@
     </div>
     <transition name="pop" appear>
         <div >
-            <CompanyDetails :class="[{visible: companyOpen}]"></CompanyDetails>
+            <CompanyDetails :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CompanyDetails>
         </div>
     </transition>
     <transition name="fade" appear>
         <div class="modal-overlay" 
             v-show="companyOpen" 
-            @click="companyOpen= false">
+            @click="companyOpen = false">
         </div>
     </transition>    
     <ul  class="company">
@@ -123,10 +123,11 @@ export default{
              for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
                 if(!result.some(invoice => invoice.companyId === el.companyId)){
-                    result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0 })
+                    result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0, years:[]
+                    })
                 }
                     
-                const year = el.date.toString().substring(6,10);
+                const year = el.date.toString().trim().substring(6,10);
                 const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
                 if(result.some(invoice => invoice.companyId === el.companyId)){
                     if(this.searchYear == parseInt(year)){
@@ -140,7 +141,36 @@ export default{
                     if(this.searchYear -2 === parseInt(year)){
                         result[elementPos].year1 += el.price
                     }
-                }        
+                    
+                    var exists = result[elementPos].years.some( x => x.year === year)
+                    //console.log("year: ", year);
+
+                    if(!exists){
+                        result[elementPos].years.push({year: year, amount:el.price})
+                        console.log("exists: ", exists);
+                    }
+                    else{
+                        let index = result[elementPos].years.findIndex(x => x.year == year);
+                        result[elementPos].years[index].amount += el.price;
+                    }
+                    //console.log(result[elementPos].years);
+
+                    // if(Object.entries(result.years).length === 0){
+                    //     console.log("years is empty!");
+                    //     result[elementPos].years[year] = el.price;
+                    // }
+                    // else{
+                    //     console.log("years is not empty!");
+                    //     if(!(year in result.years)){
+                    //         result[elementPos].years[year] = el.price.price;
+                    //     }
+                    //     else{
+                    //         result[elementPos].years.year += el.price;
+                    //     }
+                    // }
+                }
+
+
             }
             
 

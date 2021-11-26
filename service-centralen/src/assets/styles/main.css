@@ -19,6 +19,18 @@
   display: flex;
 }
 
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.red {
+  background-color: red;
+}
+
 .load-button {
   width: 80%;
   height: 50px;

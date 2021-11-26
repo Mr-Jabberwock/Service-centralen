@@ -3,27 +3,30 @@
         <div class="details__wrapper">
 
             <section class="details__header">
+                <div class="close" style="cursor:pointer;" @click="closeModal">
+                    &#x2715;
+                </div>
                 <div class="details__id">
+                    {{choosenCompany.companyId}}
                 </div>
                 <div class="details__info">
-                    {{choosenCompany.name}}
-                    {{choosenCompany.amount}}
+                    {{choosenCompany.address}}
                 </div>
             </section>
             <section class="details__content">
                 <table>
-                    <thead>
+                    <!-- <thead>
                         <tr>
 
                         </tr>
-                    </thead>
+                    </thead> -->
                     <tbody>
-                        <tr>
+                        <tr v-for="year in choosenCompany.years" :key="year.year">
                             <th class="year">
-
+                                {{year.year}}
                             </th>
                             <td class="spend">
-
+                                {{year.amount}}
                             </td>
                         </tr>
                     </tbody>
@@ -43,6 +46,11 @@ export default {
     computed: {
         choosenCompany(){
             return this.$store.getters.getCompanyObj
+        }
+    },
+    methods: {
+        closeModal(){
+            this.$emit("closeCompanyDetails");
         }
     }
 }
