@@ -205,9 +205,10 @@ export default{
          
        },
        searchFilter(){
-           console.log(this.companies.filter(comapny => {
-               comapny.address.includes(this.search)
-           }))
+           this.sortByYear();
+           this.companies = this.companies.filter(company => {
+              return company.address.includes(this.search)
+           })
        }
    }
 }
