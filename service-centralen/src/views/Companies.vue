@@ -118,7 +118,6 @@ export default{
                 });
                 
                 this.invoices = objs;
-
                 
                 this.sortByYear();  
 
@@ -163,28 +162,13 @@ export default{
                         let index = result[elementPos].years.findIndex(x => x.year == year);
                         result[elementPos].years[index].amount += el.price;
                     }
-                    //console.log(result[elementPos].years);
-
-                    // if(Object.entries(result.years).length === 0){
-                    //     console.log("years is empty!");
-                    //     result[elementPos].years[year] = el.price;
-                    // }
-                    // else{
-                    //     console.log("years is not empty!");
-                    //     if(!(year in result.years)){
-                    //         result[elementPos].years[year] = el.price.price;
-                    //     }
-                    //     else{
-                    //         result[elementPos].years.year += el.price;
-                    //     }
-                    // }
                 }
-
-
+                result.years.sort((a,b) => {a.year - b.year});
             }
+            console.log(result);
             
 
-            this.companies = result 
+            this.companies = result;
 
             this.filterResults();
 

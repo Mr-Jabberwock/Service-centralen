@@ -1,36 +1,37 @@
 <template>
     <div class="details">
         <div class="details__wrapper">
-
+            <div class="details__close" style="cursor:pointer;" @click="closeModal">
+                &#x2715;
+            </div>
             <section class="details__header">
-                <div class="close" style="cursor:pointer;" @click="closeModal">
-                    &#x2715;
-                </div>
                 <div class="details__id">
-                    {{choosenCompany.companyId}}
+                    <h1 class="details__id-text">{{choosenCompany.companyId}}</h1>
                 </div>
                 <div class="details__info">
-                    {{choosenCompany.address}}
+                    <h1 class="details__address">{{choosenCompany.address}}</h1>
                 </div>
             </section>
             <section class="details__content">
-                <table>
-                    <!-- <thead>
+                <table class="details__data">
+                    <thead>
                         <tr>
-
-                        </tr>
-                    </thead> -->
-                    <tbody>
-                        <tr v-for="year in choosenCompany.years" :key="year.year">
-                            <th class="year">
+                            <th class="year" v-for="year in choosenCompany.years" :key="year.year" >
                                 {{year.year}}
                             </th>
-                            <td class="spend">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="spend" v-for="year in choosenCompany.years" :key="year.year">
                                 {{year.amount}}
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="last-payment">
+                    <h2 class="last-payment__text">Sidste handel: {{choosenCompany.date}}</h2>
+                </div>
             </section>
         </div>
     </div>

@@ -20,6 +20,36 @@
     &__wrapper{
         width: 50%;
     }
+    &__header{
+      display: flex;
+      padding: 1rem;
+    }
+    &__info{
+      margin-left: auto;
+    }
+    &__close{
+      padding: 1rem;
+      text-align: right;
+      font-size: 150%;
+    }
+    &__content{
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    &__data{
+      width: 100%;
+    }
+    th{
+      border-bottom: 1px black solid;
+      border-collapse: collapse;
+    }
+}
+.last-payment{
+  padding: 1rem;
+  margin-top: 2rem;
+  &__text{
+    text-align: left;
+  }
 }
 .details.visible{
     transform: translateX(0%);

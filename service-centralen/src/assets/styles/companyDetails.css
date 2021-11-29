@@ -20,6 +20,46 @@
   width: 50%;
 }
 
+.details__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+}
+
+.details__info {
+  margin-left: auto;
+}
+
+.details__close {
+  padding: 1rem;
+  text-align: right;
+  font-size: 150%;
+}
+
+.details__content {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.details__data {
+  width: 100%;
+}
+
+.details th {
+  border-bottom: 1px black solid;
+  border-collapse: collapse;
+}
+
+.last-payment {
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.last-payment__text {
+  text-align: left;
+}
+
 .details.visible {
   -webkit-transform: translateX(0%);
           transform: translateX(0%);

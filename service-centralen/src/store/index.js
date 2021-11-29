@@ -16,7 +16,7 @@ export default new Vuex.Store({
     },
     SET_COMPANY_OBJECT(state, res){
       state.companyObj = res
-    }
+    },
   },
   actions: {
     setCompanyPurchases(state){
