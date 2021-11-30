@@ -10,9 +10,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
-      state.companyPurchases = payload
-      console.log(state.companyPurchases)
-
+      state.companyPurchases = payload;
     },
     SET_COMPANY_OBJECT(state, res){
       state.companyObj = res
@@ -30,6 +28,9 @@ export default new Vuex.Store({
   getters: {
     getCompanyObj(state){
       return state.companyObj;
+    },
+    getCompanyPurchases(state){
+      return state.companyPurchases;
     }
   }
 })

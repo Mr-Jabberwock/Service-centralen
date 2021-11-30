@@ -118,6 +118,7 @@ export default{
                 });
                 
                 this.invoices = objs;
+                this.$store.commit("SET_COMPANY_PURCHASES", objs);
                 
                 this.sortByYear();  
 
