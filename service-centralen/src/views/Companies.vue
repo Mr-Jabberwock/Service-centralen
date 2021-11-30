@@ -163,7 +163,7 @@ export default{
                         result[elementPos].years[index].amount += el.price;
                     }
                 }
-                result.years.sort((a,b) => {a.year - b.year});
+                //result.years.sort((a,b) => {a.year - b.year});
             }
             console.log(result);
             
