@@ -1,0 +1,43 @@
+.barchart{
+   display: flex;
+   &__sidebar{
+       max-height: 300px;
+   }
+}
+
+.barcontainer {
+    position: relative;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    border-radius: 5px 5px 0 0;
+    width: 25%;
+    min-height: 300px;;
+
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .bar {
+   
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    border: 1px solid black;
+    background: #663399;
+    width: 10%;
+    color: white;
+   
+  }
+
+  .year{
+      position: absolute;
+      display: inline-block;
+      bottom: -20px;
+      margin-left: 0px;
+  }
+
+  @for $i from 2 through 20 {
+      .barContainer__bars:nth-child(#{$i}){
+          margin-left: 0;
+      }
+  }

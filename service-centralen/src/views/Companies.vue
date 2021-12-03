@@ -130,7 +130,7 @@ export default{
 
             const result = [];
 
-             for(var i = 0; i < this.invoices.length; i++){
+             for(var i = 0; i < this.$store.getters.getCompanyPurchases.length; i++){
                 var el = this.invoices[i];
                 if(!result.some(invoice => invoice.companyId === el.companyId)){
                     result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0, years:[]
