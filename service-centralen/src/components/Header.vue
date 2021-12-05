@@ -14,11 +14,12 @@ export default{
     name: 'Header',
     methods:{
         goToCompany(){
-            this.$store.commit("SET_PAGE", "company");
+            this.$store.commit("SET_PAGE", "/");
             this.$router.push("/");
         },
         goToStatistics(){
-            this.$store.commit("SET_PAGE", "statistics");
+            this.$store.commit("SET_PAGE", "/statistics");
+            console.log(window.location.href);
             this.$router.push("/statistics");
         }
     },

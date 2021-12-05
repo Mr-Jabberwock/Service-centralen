@@ -39,7 +39,7 @@ export default {
     name:"BarCharts",
     data(){
         return{
-          invoices: this.$store.getters.getCompanyPurchases,
+          //invoices: this.$store.getters.getCompanyPurchases,
           searchNumber: "",
           customerStatistic: "",
           total: 0
@@ -49,6 +49,9 @@ export default {
     computed:{
         customerStatistics(){
             return this.customerStatistic
+        },
+        invoices(){
+            return this.$store.getters.getCompanyPurchases
         }
     },
     methods: {
