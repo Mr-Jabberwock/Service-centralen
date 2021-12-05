@@ -1,0 +1,150 @@
+.barchart-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.barchart-wrapper .chart-header {
+  margin-left: 7rem;
+  margin-right: auto;
+}
+
+.barchart-wrapper .chart-header__text {
+  text-align: left;
+}
+
+.y-axis__text {
+  text-align: right;
+  margin-right: -1rem;
+  margin-left: 1rem;
+}
+
+.x-axis {
+  width: 25%;
+}
+
+.x-axis__text {
+  text-align: right;
+}
+
+.barchart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.barchart__sidebar {
+  max-height: 300px;
+}
+
+.barcontainer {
+  position: relative;
+  border-left: 3px solid black;
+  border-bottom: 3px solid black;
+  border-radius: 5px 5px 0 0;
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.bar {
+  position: absolute;
+  display: inline-block;
+  bottom: 0;
+  border: 1px solid black;
+  background: #663399;
+  width: 10%;
+  color: white;
+}
+
+.year {
+  position: absolute;
+  display: inline-block;
+  bottom: -20px;
+  margin-left: 0px;
+}
+
+.barContainer__bars:nth-child(2) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(3) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(4) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(5) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(6) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(7) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(8) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(9) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(10) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(11) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(12) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(13) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(14) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(15) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(16) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(17) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(18) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(19) {
+  margin-left: 0;
+}
+
+.barContainer__bars:nth-child(20) {
+  margin-left: 0;
+}
+/*# sourceMappingURL=barCharts.css.map */

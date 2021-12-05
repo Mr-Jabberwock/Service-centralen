@@ -6,15 +6,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     companyPurchases: [],
-    companyObj: {}
+    companyObj: {},
+    page:"company"
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
       state.companyPurchases = payload;
     },
     SET_COMPANY_OBJECT(state, res){
-      state.companyObj = res
+      state.companyObj = res;
     },
+    SET_PAGE(state, res){
+      state.page = res;
+    }
   },
   actions: {
     setCompanyPurchases(state){
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     },
     getCompanyPurchases(state){
       return state.companyPurchases;
+    },
+    getPage(state){
+      return state.page;
     }
   }
 })

@@ -4,18 +4,36 @@
     background-color: black;
     opacity: 70%;
 
-    .header__content{
+    &__content{
         opacity: 100%;
         color: white;
         width: 30%;
         height: 100%;
         display: flex;
         justify-content: space-around;
-        padding-top: 15px;
+        //padding-top: 15px;
         .logo{
             margin-left: 10px;
             margin-top: 0;
         }
+    }
+    &__logo{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+    &__nav{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        padding: 1rem;
+
+    }
+    &__link{
+        cursor: pointer;
+    }
+    .active{
+        background-color: lightgray;
     }
 
     

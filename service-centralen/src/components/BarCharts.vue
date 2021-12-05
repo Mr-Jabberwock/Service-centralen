@@ -1,9 +1,12 @@
 <template>
- <div>
-     {{total}}
-     <input type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+ <div class="barchart-wrapper">
+     <div class="chart-header">
+        <h2 class="chart-header__text">Individuelle</h2>
+        <input type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+     </div>
+     <!-- {{total}} -->
      <div class="barchart">
-        
+            <p class="y-axis__text">indtægt</p>
             <ul class="barchart__sidebar">
                     <li style="height: 20%">{{total}}</li>
                     <li style="height: 20%">{{total / 100 * 80}}</li>
@@ -13,8 +16,8 @@
                     <li style="height: 0%">0</li>
 
             </ul>
+            <div class="x-axis">
              <ul class="barcontainer">
-                 
                  <div class="barContainer__bars"  v-for="element in customerStatistics" :key="element.year">
                      <li class='bar' :style="{height: element.percentage + '%'}" scope="row" > 
                         <div >{{element.price}}</div>
@@ -24,6 +27,8 @@
                      </li>
                  </div>
              </ul>
+             <p class="x-axis__text">år</p>
+            </div>
     
      </div>
  </div>

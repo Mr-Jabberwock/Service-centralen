@@ -1,3 +1,27 @@
+.barchart-wrapper{
+    display: flex;
+    flex-direction: column;
+    .chart-header{
+        margin-left: 7rem;
+        margin-right: auto;
+        &__text{
+            text-align: left;
+        }
+    }
+}
+.y-axis{
+    &__text{
+        text-align: right;
+        margin-right: -1rem;
+        margin-left: 1rem;
+    }
+}
+.x-axis{
+    width: 25%;
+    &__text{
+        text-align: right;
+    }
+}
 .barchart{
    display: flex;
    &__sidebar{
@@ -10,7 +34,7 @@
     border-left: 3px solid black;
     border-bottom: 3px solid black;
     border-radius: 5px 5px 0 0;
-    width: 25%;
+    //width: 25%;
     min-height: 300px;;
 
     display: flex;
