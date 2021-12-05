@@ -1,8 +1,8 @@
 <template>
    <div class="header">
        <div class="header__content">
-           <div class="header__logo">LOGO</div>
-           <div class="header__nav" :class="{ active: page == 'company' }"><a class="header__link" @click="goToCompany">Firmaer</a></div>
+           <div @click="goToCompany" class="header__logo">LOGO</div>
+           <div class="header__nav" :class="{ active: page == '' }"><a class="header__link" @click="goToCompany">Firmaer</a></div>
            <div class="header__nav" :class="{ active: page == 'statistics' }"><a class="header__link" @click="goToStatistics">Statestikker</a></div>
            <div class="header__nav" :class="{ active: page == 'overview' }"><a class="header__link">Oversigt</a></div>
        </div>
@@ -14,12 +14,11 @@ export default{
     name: 'Header',
     methods:{
         goToCompany(){
-            this.$store.commit("SET_PAGE", "/");
+            this.$store.commit("SET_PAGE", "");
             this.$router.push("/");
         },
         goToStatistics(){
-            this.$store.commit("SET_PAGE", "/statistics");
-            console.log(window.location.href);
+            this.$store.commit("SET_PAGE", "statistics");
             this.$router.push("/statistics");
         }
     },

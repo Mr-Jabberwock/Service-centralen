@@ -17,11 +17,6 @@
       justify-content: space-around;
 }
 
-.header__content .logo {
-  margin-left: 10px;
-  margin-top: 0;
-}
-
 .header__logo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -30,6 +25,7 @@
       -ms-flex-align: center;
           align-items: center;
   justify-items: center;
+  cursor: pointer;
 }
 
 .header__nav {
