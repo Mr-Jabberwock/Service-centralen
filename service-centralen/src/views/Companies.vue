@@ -83,6 +83,10 @@ export default{
        toBeShown(){
            return this.companies.slice(0, this.currentPage * 4)
        }
+    //    ,
+    //    companies(){
+    //        return this.$store.getters.getCompanyPurchases;
+    //    }
    },
    methods: {
        openCompany(obj){
