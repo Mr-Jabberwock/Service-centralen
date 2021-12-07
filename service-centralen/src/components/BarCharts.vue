@@ -54,7 +54,7 @@ export default {
                                 ['0', 0, 'black']],
             total: 0,
             options: {
-                title: "Individuelle",
+                title: "",
                 width: 1100,
                 height: 400
             }
@@ -71,6 +71,10 @@ export default {
     },
     methods: {
         computeByCustomerNumber(){
+            if(this.searchNumber == ""){
+                return this.customerStatistic = [['Spend', 'Year', { role: 'style' }],
+                                ['0', 0, 'black']];
+            }
             const result = [];
             let chartArray = [['Spend', 'Year', { role: 'style' }]];
             let total = 0;
@@ -78,6 +82,7 @@ export default {
                 var el = this.invoices[i];
                 const year = el.date.toString().trim().substring(6,10);
                 if(el.companyId == this.searchNumber){
+                    this.options.title = el.companyId + " omsætning pr. år";
                     if(!result.some(invoice => invoice.year == year)){
                         result.push({year: year, price: el.price})
                     }

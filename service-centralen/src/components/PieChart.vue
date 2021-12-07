@@ -29,10 +29,15 @@ export default{
       searchYear: ""
     };
    },
+   computed:{
+       allCompanies(){
+           return this.$store.getters.getCompanyPurchases;
+       }
+   },
     methods:{
         companiesByYear(){
             this.data = [['Daily Routine', 'Hours per Day']]
-            let companies = this.$store.getters.getCompanyPurchases;
+            let companies = this.allCompanies;
 
             let result = [];
             let total = 0;

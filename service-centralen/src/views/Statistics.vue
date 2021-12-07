@@ -4,6 +4,7 @@
         <h1>Statistics</h1>
         <BarCharts />
         <PieChart />
+        <BarChartYear/>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
 import Header from '../components/Header.vue'
 import BarCharts from '../components/BarCharts.vue'
 import PieChart from '../components/PieChart.vue'
+import BarChartYear from '../components/BarChartYear.vue'
 
 
 export default {
@@ -18,7 +20,8 @@ export default {
     components: {
         Header,
         BarCharts,
-        PieChart
+        PieChart,
+        BarChartYear
     }
 }
 
