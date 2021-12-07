@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button v-on:click="companiesTotalAmount"> Click ME</button>
+    <input v-model="searchYear" type="text" v-on:keyup.enter="companiesByYear" />
     <GChart
       type="PieChart"
       :options="options"
@@ -25,23 +25,28 @@ export default{
       options: {
         width: 1100,
         height: 400
-      }
+      },
+      searchYear: ""
     };
    },
     methods:{
-        companiesTotalAmount(){
+        companiesByYear(){
+            this.data = [['Daily Routine', 'Hours per Day']]
             let companies = this.$store.getters.getCompanyPurchases;
 
             let result = [];
             let total = 0;
             for(var i = 0; i < companies.length; i++){
                 var el = companies[i];
-                if(!result.some(company => company.companyId === el.companyId)){
+                 const year = el.date.toString().trim().substring(6,10);
+                if(year == this.searchYear){
+                    if(!result.some(company => company.companyId === el.companyId)){
                     result.push({ companyId: el.companyId, address: el.address, amount: 0, ancle: 0})
-                }
-                if(result.some(company => company.companyId === el.companyId)){
-                    let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
-                    result[index].amount += el.price;
+                    }
+                    if(result.some(company => company.companyId === el.companyId)){
+                        let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
+                        result[index].amount += el.price;
+                    }
                 }
                 
                 total += el.price
@@ -55,6 +60,7 @@ export default{
                 }
             }
             console.log(total)
+            console.log(this.data)
         }
     }
 }
