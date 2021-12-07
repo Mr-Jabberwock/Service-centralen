@@ -50,7 +50,8 @@ export default {
         return{
             currrentInvoices: this.invoices,
             searchNumber: "",
-            customerStatistic: [['Spend', 'Year', { role: 'style' }]],
+            customerStatistic: [['Spend', 'Year', { role: 'style' }],
+                                ['0', 0, 'black']],
             total: 0,
             options: {
                 title: "Individuelle",
@@ -76,7 +77,7 @@ export default {
             for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
                 const year = el.date.toString().trim().substring(6,10);
-                if(el.companyId == "110311"){
+                if(el.companyId == this.searchNumber){
                     if(!result.some(invoice => invoice.year == year)){
                         result.push({year: year, price: el.price})
                     }
@@ -101,7 +102,7 @@ export default {
                 // }
             }
             result.forEach(element => {
-                chartArray.push([element.year, element.price])
+                chartArray.push([element.year, element.price, '#6B58E2'])
             });
             this.customerStatistic = chartArray;
         }
