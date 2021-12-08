@@ -2,7 +2,7 @@
   position: absolute;
   top: 0%;
   left: 50%;
-  width: 100%;
+  width: 50%;
   height: 100%;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -17,7 +17,7 @@
 }
 
 .details__wrapper {
-  width: 50%;
+  width: 100%;
 }
 
 .details__header {

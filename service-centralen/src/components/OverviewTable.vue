@@ -13,17 +13,19 @@ export default{
         invoices(){
             let invoices = this.$store.getters.getCompanyPurchases
             const result = [];
+            let year = "";
             for(var i = 0; i < invoices.length; i++){
                 var el = invoices[i];
                 if(!result.some(company => company.companyId === el.companyId)){
-                    result.push({ companyId: el.companyId, address: el.address})
+                    result.push({ companyId: el.companyId, spend:[]});
                 }
-                
-                    
+                if(year != el.date.toString().trim().substring(6,10)){
+                    year = el.date.toString().trim().substring(6,10);
+                }
+                const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);  
                 if(result.some(company => company.companyId === el.companyId)){
                     let currentYear = el.date.toString().trim().substring(6,10);
-
-                    if(!result.some(year => year.date.toString().trim().substring(6,10) == currentYear)){
+                    if(!result[elementPos].spend.some(year => year.date.toString().trim().substring(6,10) == currentYear)){
                         console.log(currentYear)
                     }
                     let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
