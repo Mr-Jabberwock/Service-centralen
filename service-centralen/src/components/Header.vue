@@ -4,7 +4,7 @@
            <div @click="goToCompany" class="header__logo">LOGO</div>
            <div class="header__nav" :class="{ active: page == '' }"><a class="header__link" @click="goToCompany">Firmaer</a></div>
            <div class="header__nav" :class="{ active: page == 'statistics' }"><a class="header__link" @click="goToStatistics">Statestikker</a></div>
-           <div class="header__nav" :class="{ active: page == 'overview' }"><a class="header__link">Oversigt</a></div>
+           <div class="header__nav" :class="{ active: page == 'overview' }"><a class="header__link" @click="goToOverview">Oversigt</a></div>
        </div>
    </div>
 </template>
@@ -20,6 +20,10 @@ export default{
         goToStatistics(){
             this.$store.commit("SET_PAGE", "statistics");
             this.$router.push("/statistics");
+        },
+        goToOverview(){
+            this.$store.commit("SET_PAGE", "overview");
+            this.$router.push("/overview");
         }
     },
     computed:{
