@@ -1,36 +1,9 @@
 <template>
  <div class="barchart-wrapper">
      <div class="chart-header">
-        <h2 class="chart-header__text">Individuelle</h2>
-        <input type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+        <input v-if="search === 'number'" type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+        <input v-if="search === 'year'" type="text" v-model="searchYear" v-on:keyup.enter="computeByYear "/>
      </div>
-     <!-- {{total}} -->
-     <!-- <div class="barchart">
-            <p class="y-axis__text">indtægt</p>
-            <ul class="barchart__sidebar">
-                    <li style="height: 20%">{{total}}</li>
-                    <li style="height: 20%">{{total / 100 * 80}}</li>
-                    <li style="height: 20%">{{total / 100 * 60}}</li>
-                    <li style="height: 20%">{{total / 100 * 40}}</li>
-                    <li style="height: 20%">{{total / 100 * 20}}</li>
-                    <li style="height: 0%">0</li>
-
-            </ul>
-            <div class="x-axis">
-             <ul class="barcontainer">
-                 <div class="barContainer__bars"  v-for="element in customerStatistics" :key="element.year">
-                     <li class='bar' :style="{height: element.percentage + '%'}" scope="row" > 
-                        <div >{{element.price}}</div>
-                     </li>
-                     <li class="year">
-                         <div>{{element.year}}</div>
-                     </li>
-                 </div>
-             </ul>
-             <p class="x-axis__text">år</p>
-            </div>
-    
-     </div> -->
     <GChart
       type="ColumnChart"
       :options="options"
@@ -50,6 +23,7 @@ export default {
         return{
             currrentInvoices: this.invoices,
             searchNumber: "",
+            searchYear: "",
             customerStatistic: [['Spend', 'Year', { role: 'style' }],
                                 ['0', 0, 'black']],
             total: 0,
@@ -60,6 +34,9 @@ export default {
             }
         }
 
+    },
+    props:{
+        search: String
     },
     computed:{
         customerStatistics(){
@@ -110,6 +87,36 @@ export default {
                 chartArray.push([element.year, element.price, '#6B58E2'])
             });
             this.customerStatistic = chartArray;
+        },
+        computeByYear(){
+            let chartArray = [['Spend', 'Address', { role: 'style' }]];
+            let companies = this.invoices;
+            if(this.searchYear == ""){
+                return this.customerStatistic = [['Spend', 'Address', { role: 'style' }],
+                                ['0', 0, 'black']];
+            }
+            let result = [];
+            for(var i = 0; i < companies.length; i++){
+                var el = companies[i];
+                const year = el.date.toString().trim().substring(6,10);
+                
+                if(year == this.searchYear){
+                    if(!result.some(company => company.companyId === el.companyId)){
+                    result.push({ companyId: el.companyId, address: el.address, amount: 0})
+                    }
+                    if(result.some(company => company.companyId === el.companyId)){
+                        let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
+                        result[index].amount += el.price;
+                    }
+                }
+            }
+            for(var j = 0; j < result.length; j++){
+                console.log([result[j].address, result[j].amount, '#6B58E2'])
+                chartArray.push([result[j].address, result[j].amount, '#6B58E2'])
+                
+            }
+            this.customerStatistic = chartArray;
+            console.log(chartArray)
         }
     }
 }

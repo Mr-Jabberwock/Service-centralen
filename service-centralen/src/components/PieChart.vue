@@ -1,6 +1,6 @@
 <template>
 <div>
-    <input v-model="searchYear" type="text" v-on:keyup.enter="companiesByYear" />
+    <input v-show="search !== false" v-model="searchYear" type="text" v-on:keyup.enter="companiesByYear" />
     <GChart
       type="PieChart"
       :options="options"
@@ -28,6 +28,9 @@ export default{
       },
       searchYear: ""
     };
+   },
+   props:{
+      search: Boolean
    },
    computed:{
        allCompanies(){
@@ -66,6 +69,32 @@ export default{
             }
             console.log(total)
             console.log(this.data)
+        },
+        computedTotalAmounts(){
+            
+            let companies = this.$store.getters.getCompanyPurchases;
+
+            let result = [];
+            for(var i = 0; i < companies.length; i++){
+                var el = companies[i];
+                if(!result.some(company => company.companyId === el.companyId)){
+                    result.push({ companyId: el.companyId, address: el.address, amount: 0})
+                    }
+                if(result.some(company => company.companyId === el.companyId)){
+                    let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
+                    result[index].amount += el.price;
+                }
+                if(i == companies.length -1){
+                    for(var j = 0; j < result.length; j++){
+                        this.data.push([result[j].address, result[j].amount])
+                    }
+                }
+            }
+        }
+    },
+    created(){
+        if(this.search == false){
+            this.computedTotalAmounts();
         }
     }
 }
