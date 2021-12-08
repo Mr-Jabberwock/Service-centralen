@@ -1,6 +1,12 @@
 <template>
-<div>
-    <input v-show="search !== false" v-model="searchYear" type="text" v-on:keyup.enter="companiesByYear" />
+<div class="piechart">
+    <div class="piechart__header">
+        <div class="piechart-header__content">
+            <h3 class="piechart-header__text"  v-show="search === false">Opdeling af adresser overordnet</h3>
+            <h3 class="piechart-header__text" v-show="search !== false">Opdeling af adresser i bestemt år</h3>
+            <input class="piechart-header__input" v-show="search !== false" v-model="searchYear" type="text" v-on:keyup.enter="companiesByYear" />
+        </div>
+    </div>
     <GChart
       type="PieChart"
       :options="options"
@@ -23,8 +29,8 @@ export default{
           
       ],
       options: {
-        width: 1100,
-        height: 400
+        width: 720,
+        height: 540
       },
       searchYear: ""
     };
@@ -100,3 +106,6 @@ export default{
 }
 
 </script>
+<style lang="scss">
+@import "../assets/styles/pieCharts";
+</style>

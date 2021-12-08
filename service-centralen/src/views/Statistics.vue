@@ -2,10 +2,14 @@
     <div>
         <Header />
         <h1>Statistics</h1>
-        <BarCharts search="number" />
-        <BarCharts search="year" />
-        <PieChart />
-        <PieChart search=false />
+        <div class="numbercharts">
+            <BarCharts search="number" />
+            <PieChart />
+        </div>
+        <div class="yearcharts">
+            <BarCharts search="year" />
+            <PieChart search=false />
+        </div>
     </div>
 </template>
 

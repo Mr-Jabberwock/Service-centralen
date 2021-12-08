@@ -1,4 +1,4 @@
-.barchart{
+.piechart{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -6,11 +6,10 @@
         width: 100%;
     }
 }
-.barchart-header{
+.piechart-header{
     &__content{
         width: 50%;
         text-align: left;
-        padding-left: 90px;
+        margin-left: 90px;
     }
 }
-

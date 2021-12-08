@@ -189,4 +189,16 @@ ul {
 .pop-leave-to {
   left: 50%;
 }
+
+.numbercharts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.yearcharts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 /*# sourceMappingURL=main.css.map */

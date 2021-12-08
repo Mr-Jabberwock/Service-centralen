@@ -1,8 +1,12 @@
 <template>
- <div class="barchart-wrapper">
-     <div class="chart-header">
-        <input v-if="search === 'number'" type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
-        <input v-if="search === 'year'" type="text" v-model="searchYear" v-on:keyup.enter="computeByYear "/>
+ <div class="barchart">
+     <div class="barchart__header">
+         <div class="barchart-header__content">
+            <h3 v-if="search === 'number'" class="barchart-header__text">Omsætning i bestemt adresse</h3>
+            <h3 v-if="search === 'year'" class="barchart-header__text">Omsætning i bestemt år</h3>
+            <input class="barchart-header__input" v-if="search === 'number'" type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+            <input class="barchart-header__input" v-if="search === 'year'" type="text" v-model="searchYear" v-on:keyup.enter="computeByYear "/>
+         </div>
      </div>
     <GChart
       type="ColumnChart"
@@ -24,19 +28,28 @@ export default {
             currrentInvoices: this.invoices,
             searchNumber: "",
             searchYear: "",
-            customerStatistic: [['Spend', 'Year', { role: 'style' }],
-                                ['0', 0, 'black']],
+            customerStatistic: [],
             total: 0,
             options: {
                 title: "",
-                width: 1100,
-                height: 400
+                width: 720,
+                height: 540
             }
         }
 
     },
     props:{
         search: String
+    },
+    created() {
+        if(this.search === 'number'){
+            this.customerStatistic = [['Spend', 'Year', { role: 'style' }],
+                                    ['0', 0, 'black']]
+        }
+        if(this.search === 'year'){
+            this.customerStatistic = [['Spend', 'Address', { role: 'style' }],
+                    ['0', 0, 'black']]
+        }
     },
     computed:{
         customerStatistics(){
@@ -101,6 +114,7 @@ export default {
                 const year = el.date.toString().trim().substring(6,10);
                 
                 if(year == this.searchYear){
+                    this.options.title = "Omsætning i år " + this.searchYear;
                     if(!result.some(company => company.companyId === el.companyId)){
                     result.push({ companyId: el.companyId, address: el.address, amount: 0})
                     }
