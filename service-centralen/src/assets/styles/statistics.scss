@@ -1,6 +1,16 @@
+.statistics{
+    display: flex;
+    flex-direction: column;
+}
 .numbercharts{
     display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-evenly;
 }
 .yearcharts{
     display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-evenly;
 }

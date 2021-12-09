@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="statistics">
         <Header />
         <h1>Statistics</h1>
         <div class="numbercharts">
@@ -10,6 +10,7 @@
             <BarCharts search="year" />
             <PieChart search=false />
         </div>
+        <Footer class="footer" />
     </div>
 </template>
 
@@ -17,14 +18,15 @@
 import Header from '../components/Header.vue'
 import BarCharts from '../components/BarCharts.vue'
 import PieChart from '../components/PieChart.vue'
-
+import Footer from "../components/Footer.vue"
 
 export default {
     name:"Statistics",
     components: {
         Header,
         BarCharts,
-        PieChart
+        PieChart,
+        Footer
     }
 }
 

@@ -1,16 +1,26 @@
+.companies {
+  width: 100%;
+}
+
+.company-view {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .company {
+  margin-left: 5%;
+  width: 90%;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  gap: 50px 0px;
+  gap: 50px 50px;
 }
 
-.company .company__details {
-  width: 80%;
+.company__details {
   height: 50px;
   margin-top: 20px;
-  margin-left: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,11 +29,11 @@
           justify-content: space-between;
 }
 
-.company .company__details .company__address {
+.company__address {
   margin-left: 20px;
 }
 
-.company .company__details .company__amount {
+.company__amount {
   margin-right: 20px;
 }
 
@@ -39,15 +49,20 @@
   background-color: rgba(255, 0, 0, 0.7);
 }
 
+.bottom-image {
+  width: 100%;
+}
+
 .load-button {
-  width: 90%;
+  height: 50px;
   margin-top: 100px;
+  width: 90%;
 }
 
 .import-filter {
   margin-top: 5%;
-  margin-left: 5%;
   width: 90%;
+  margin-left: 5%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -58,7 +73,6 @@
 
 .import-filter .import-filter__filters {
   width: 80%;
-  margin-left: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -90,6 +104,7 @@
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
 
 .details {
@@ -192,16 +207,36 @@ ul {
   left: 50%;
 }
 
+.statistics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .numbercharts {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .yearcharts {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .overview {
