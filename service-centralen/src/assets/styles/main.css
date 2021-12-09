@@ -154,11 +154,11 @@ ul {
 
 .details__data {
   width: 100%;
+  border-collapse: collapse;
 }
 
-.details th {
+.details__head {
   border-bottom: 1px black solid;
-  border-collapse: collapse;
 }
 
 .last-payment {
@@ -250,10 +250,10 @@ ul {
 .overview__table {
   width: 100%;
   padding: 2rem;
+  border-collapse: collapse;
 }
 
-.overview th, .overview .address, .overview .spend {
+.overview__head {
   border-bottom: 1px black solid;
-  border-collapse: collapse;
 }
 /*# sourceMappingURL=main.css.map */

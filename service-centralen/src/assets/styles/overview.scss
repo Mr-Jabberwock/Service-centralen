@@ -6,9 +6,9 @@
     &__table{
         width: 100%;
         padding: 2rem;
-    }
-    th, .address, .spend{
-        border-bottom: 1px black solid;
         border-collapse: collapse;
+    }
+    &__head{
+        border-bottom: 1px black solid;
     }
 }
