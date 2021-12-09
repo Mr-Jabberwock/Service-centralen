@@ -1,13 +1,19 @@
+
+.company-view{
+    width: 100%;
+    position: absolute;
+}
 .company{
+    margin-left: 5%;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px 0px;
+    gap: 50px 50px;
 
     .company__details{
-        width: 80%;
         height: 50px;
         margin-top: 20px;
-        margin-left: 10%;
+        
 
         display: flex;
         justify-content: space-between;
@@ -34,23 +40,26 @@
      background-color: rgba(255, 0, 0, 0.7);
 }
 
+.bottom-image{
+    width: 100%;;
+}
 .load-button{
-    width: 90%;
+    height: 50px;
     margin-top: 100px;
+    width: 90%;
+
 }
 
 .import-filter{
     margin-top: 5%; 
-
-    margin-left: 5%;
     width: 90%;
+    margin-left: 5%;
 
     display: flex;
     justify-content: space-between;   
 
     .import-filter__filters{
         width: 80%;
-        margin-left: 20px;
         display: flex;
         justify-content: flex-end;
 
@@ -84,4 +93,6 @@
 
 ul {
     list-style-type: none;
+    padding: 0;
 }
+

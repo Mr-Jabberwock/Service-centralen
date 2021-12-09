@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="companies">
     <Header />
     <div class="import-filter">
         <div class="import-filter__picker">
@@ -37,7 +37,8 @@
             @click="companyOpen = false">
         </div>
     </transition>    
-    <ul  class="company">
+    <div class="company-view">
+        <ul  class="company">
          <li v-for="company in toBeShown" :key="company.invoice" @click="openCompany(company)">
             <div class="company__details"
                  :class="[company.price < company.year2 && company.year2 < company.year1 ? 'red' : 'green',
@@ -48,10 +49,16 @@
                 <p class="company__amount"> {{company.price}}</p>
             </div>
         </li>
+        
     </ul>
     <div class="bottom-image">
         <button class="load-button" @click="increasePage">Indlæs 8 mere</button>
     </div>
+    
+    </div>
+    
+    
+    <Footer class="footer" />
 
 </div>
 </template>
@@ -60,6 +67,7 @@
 import Header from "../components/Header.vue"
 import XLSX from "xlsx"
 import CompanyDetails from "../components/CompanyDetails.vue"
+import Footer from "../components/Footer.vue"
 export default{
    name: 'Companies',
    data(){
@@ -77,7 +85,8 @@ export default{
    },
    components: {
       Header,
-      CompanyDetails
+      CompanyDetails,
+      Footer
    },
    computed: {
        toBeShown(){
@@ -156,7 +165,7 @@ export default{
                         result[elementPos].year1 += el.price
                     }
                     
-                    let exists = result[elementPos].years.some( x => x.year === year)
+                    var exists = result[elementPos].years.some( x => x.year === year)
                     //console.log("year: ", year);
 
                     if(!exists){
