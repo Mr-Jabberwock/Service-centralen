@@ -191,11 +191,11 @@ ul {
 
 .details__data {
   width: 100%;
-  border-collapse: collapse;
 }
 
-.details__head {
+.details th {
   border-bottom: 1px black solid;
+  border-collapse: collapse;
 }
 
 .last-payment {
