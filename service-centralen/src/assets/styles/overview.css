@@ -1,0 +1,18 @@
+.overview {
+  width: 100%;
+}
+
+.overview__overview {
+  width: 100%;
+}
+
+.overview__table {
+  width: 100%;
+  padding: 2rem;
+}
+
+.overview th, .overview .address, .overview .spend {
+  border-bottom: 1px black solid;
+  border-collapse: collapse;
+}
+/*# sourceMappingURL=overview.css.map */

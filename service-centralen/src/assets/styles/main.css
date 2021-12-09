@@ -93,6 +93,7 @@ ul {
 }
 
 .details {
+  display: none;
   position: absolute;
   top: 0%;
   left: 50%;
@@ -111,7 +112,7 @@ ul {
 }
 
 .details__wrapper {
-  width: 50%;
+  width: 100%;
 }
 
 .details__header {
@@ -155,6 +156,7 @@ ul {
 }
 
 .details.visible {
+  display: block;
   -webkit-transform: translateX(0%);
           transform: translateX(0%);
 }
@@ -200,5 +202,23 @@ ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.overview {
+  width: 100%;
+}
+
+.overview__overview {
+  width: 100%;
+}
+
+.overview__table {
+  width: 100%;
+  padding: 2rem;
+}
+
+.overview th, .overview .address, .overview .spend {
+  border-bottom: 1px black solid;
+  border-collapse: collapse;
 }
 /*# sourceMappingURL=main.css.map */

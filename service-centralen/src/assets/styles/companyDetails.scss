@@ -1,4 +1,5 @@
 .details{
+    display: none;
     position: absolute;
     top: 0%;
     // right: 0;
@@ -52,7 +53,8 @@
   }
 }
 .details.visible{
-    transform: translateX(0%);
+  display: block;
+  transform: translateX(0%);
 }
 
 .modal-overlay {

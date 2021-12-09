@@ -156,7 +156,7 @@ export default{
                         result[elementPos].year1 += el.price
                     }
                     
-                    var exists = result[elementPos].years.some( x => x.year === year)
+                    let exists = result[elementPos].years.some( x => x.year === year)
                     //console.log("year: ", year);
 
                     if(!exists){

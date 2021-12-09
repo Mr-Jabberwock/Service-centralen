@@ -1,7 +1,27 @@
 <template>
-<div>
-
-    {{invoices}}
+<div class="overview">
+    <div class="overview__content">
+        <table class="overview__table">
+            <thead>
+                <tr>
+                    <th> Address ID</th>
+                    <th class="year" v-for="year in allYears" :key="year" >
+                        {{year}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="address" v-for="address in invoices" :key="address">
+                    {{address.companyId}}
+                    <td class="spend" v-for="amount in address.spend" :key="amount.year">
+                        {{amount.amount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- {{invoices}}
+    {{allYears}} -->
 
 </div>
 </template>
@@ -9,9 +29,14 @@
 <script>
 export default{
     name: 'OverviewTable',
+    // data(){
+    //     return{
+
+    //     }
+    // },
     computed:{
         invoices(){
-            let invoices = this.$store.getters.getCompanyPurchases
+            let invoices = this.$store.getters.getCompanyPurchases;
             const result = [];
             let year = "";
             for(var i = 0; i < invoices.length; i++){
@@ -25,15 +50,29 @@ export default{
                 const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);  
                 if(result.some(company => company.companyId === el.companyId)){
                     let currentYear = el.date.toString().trim().substring(6,10);
-                    if(!result[elementPos].spend.some(year => year.date.toString().trim().substring(6,10) == currentYear)){
-                        console.log(currentYear)
+                    if(!result[elementPos].spend.some(x => x.year == currentYear)){
+                        result[elementPos].spend.push({year: currentYear, amount: el.price});
                     }
-                    let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
-                    result[index].amount += el.price;
+                    else{
+                        let index = result[elementPos].spend.map((x) => {return x.year}).indexOf(currentYear);
+                        result[elementPos].spend[index].amount += el.price;
+                    }
                 }
             }
-
+            console.log("result", result);
             return result;
+        },
+        allYears(){
+            let invoices = this.$store.getters.getCompanyPurchases;
+            const years = [];
+            invoices.forEach(element => {
+                let year = element.date.toString().trim().substring(6,10);
+                if(!years.some(x => x === year)){
+                    years.push(year);
+                }
+            });
+            console.log("years", years);
+            return years;
         }
     }
 }

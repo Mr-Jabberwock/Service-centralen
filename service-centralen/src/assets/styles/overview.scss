@@ -1,0 +1,14 @@
+.overview{
+    width: 100%;
+    &__overview{
+        width: 100%;
+    }
+    &__table{
+        width: 100%;
+        padding: 2rem;
+    }
+    th, .address, .spend{
+        border-bottom: 1px black solid;
+        border-collapse: collapse;
+    }
+}
