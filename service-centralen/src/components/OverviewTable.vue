@@ -2,7 +2,7 @@
 <div class="overview">
     <div class="overview__content">
         <table class="overview__table">
-            <thead class="overview_head">
+            <thead class="overview__head">
                 <tr>
                     <th> Address ID</th>
                     <th class="year" v-for="year in allYears" :key="year" >
