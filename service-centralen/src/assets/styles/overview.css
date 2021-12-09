@@ -9,10 +9,10 @@
 .overview__table {
   width: 100%;
   padding: 2rem;
+  border-collapse: collapse;
 }
 
-.overview th, .overview .address, .overview .spend {
+.overview__head {
   border-bottom: 1px black solid;
-  border-collapse: collapse;
 }
 /*# sourceMappingURL=overview.css.map */

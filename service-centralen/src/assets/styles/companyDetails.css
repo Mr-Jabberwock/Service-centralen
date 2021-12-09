@@ -46,11 +46,11 @@
 
 .details__data {
   width: 100%;
+  border-collapse: collapse;
 }
 
-.details th {
+.details__head {
   border-bottom: 1px black solid;
-  border-collapse: collapse;
 }
 
 .last-payment {

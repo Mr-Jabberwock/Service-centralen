@@ -40,11 +40,12 @@
   }
   &__data{
     width: 100%;
-  }
-  th{
-    border-bottom: 1px black solid;
     border-collapse: collapse;
   }
+  &__head{
+    border-bottom: 1px black solid;
+  }
+
 }
 .last-payment{
   padding: 1rem;

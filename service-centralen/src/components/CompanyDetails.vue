@@ -14,7 +14,7 @@
             </section>
             <section class="details__content">
                 <table class="details__data">
-                    <thead>
+                    <thead class="details__head">
                         <tr>
                             <th class="year" v-for="year in choosenCompany.years" :key="year.year" >
                                 {{year.year}}
