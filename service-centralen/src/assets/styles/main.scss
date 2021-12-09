@@ -2,3 +2,11 @@
 @import "companyDetails";
 @import "statistics";
 @import "overview";
+body{
+    background-image: url("../img/waves.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0px 200px; 
+    background-size: 100% 100%;
+}
+

@@ -32,8 +32,9 @@ export default {
             total: 0,
             options: {
                 title: "",
-                width: 720,
-                height: 540
+                width: 600,
+                height: 400,
+                backgroundColor: { fill:'transparent' }
             }
         }
 

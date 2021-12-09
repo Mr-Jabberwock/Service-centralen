@@ -27,7 +27,7 @@
         </div>
     </div>
     <transition name="pop" appear>
-        <div >
+        <div class="modal" role="dialog">
             <CompanyDetails :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CompanyDetails>
         </div>
     </transition>
@@ -58,7 +58,7 @@
     </div>
     
     
-    <Footer class="footer" />
+    <!-- <Footer class="footer" /> -->
 
 </div>
 </template>
@@ -67,7 +67,7 @@
 import Header from "../components/Header.vue"
 import XLSX from "xlsx"
 import CompanyDetails from "../components/CompanyDetails.vue"
-import Footer from "../components/Footer.vue"
+// import Footer from "../components/Footer.vue"
 export default{
    name: 'Companies',
    data(){
@@ -85,8 +85,9 @@ export default{
    },
    components: {
       Header,
-      CompanyDetails,
-      Footer
+      CompanyDetails
+    //   ,
+    //   Footer
    },
    computed: {
        toBeShown(){
@@ -97,6 +98,11 @@ export default{
     //        return this.$store.getters.getCompanyPurchases;
     //    }
    },
+    created(){
+    if(this.$store.getters.getPage == ""){
+        document.body.style.backgroundPositionY = "200px"
+    }
+    },
    methods: {
        openCompany(obj){
            this.companyOpen = true;

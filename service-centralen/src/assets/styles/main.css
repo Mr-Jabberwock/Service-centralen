@@ -107,9 +107,46 @@ ul {
   padding: 0;
 }
 
-.details {
-  display: none;
+.modal-overlay {
+  content: '';
   position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  background: #2c3e50;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.pop-enter-active,
+.pop-leave-active {
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+.pop-enter,
+.pop-leave-to {
+  left: 50%;
+}
+
+.details {
+  visibility: hidden;
+  position: absolute;
+  position: fixed;
   top: 0%;
   left: 50%;
   width: 50%;
@@ -171,50 +208,19 @@ ul {
 }
 
 .details.visible {
-  display: block;
+  visibility: visible;
   -webkit-transform: translateX(0%);
           transform: translateX(0%);
 }
 
-.modal-overlay {
-  content: '';
-  position: absolute;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 998;
-  background: #2c3e50;
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  -webkit-transition: all 0.6s ease;
-  transition: all 0.6s ease;
-}
-
-.pop-enter-active,
-.pop-leave-active {
-  -webkit-transition: all 0.6s ease;
-  transition: all 0.6s ease;
-}
-
-.pop-enter,
-.pop-leave-to {
-  left: 50%;
-}
-
 .statistics {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  width: 100%;
+}
+
+.statistics__wrapper {
+  margin-top: 2rem;
+  height: 65vh;
+  overflow-y: auto;
 }
 
 .numbercharts {
@@ -255,5 +261,13 @@ ul {
 .overview th, .overview .address, .overview .spend {
   border-bottom: 1px black solid;
   border-collapse: collapse;
+}
+
+body {
+  background-image: url("../img/waves.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 0px 200px;
+  background-size: 100% 100%;
 }
 /*# sourceMappingURL=main.css.map */

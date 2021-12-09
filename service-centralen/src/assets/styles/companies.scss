@@ -99,4 +99,58 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+// .modal{
+//     position: absolute;
+//     position: fixed;
+//     top: 0%;
+//     // right: 0;
+//     // bottom: 0;
+//     left: 50%;
+//     // margin: auto;
+//     // text-align: center;
+//     width: 50%;
+//     height: 100%;
+//     //max-width: 22em;
+//     //padding: 2rem;
+//     border-top-left-radius: 3px;
+//     border-bottom-left-radius: 3px;
+//     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+//     background: white;
+//     z-index: 999;
+//     transition: all 0.6s ease;
+//     transform: translateX(100%);
+// }
+.modal-overlay {
+    content: '';
+    position: absolute;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 998;
+    background: #2c3e50;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.3s ease;
+  }
+  
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  
+  .pop-enter-active,
+  .pop-leave-active {
+    transition: all 0.6s ease;
+  }
+  
+  .pop-enter,
+  .pop-leave-to {
+      //opacity: 0;
+      left: 50%
+  }
 
