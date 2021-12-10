@@ -10,9 +10,9 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="overview__body">
                 <tr class="address" v-for="address in invoices" :key="address">
-                    {{address.companyId}}
+                    <td class="address__id">{{address.companyId}}</td>
                     <td class="spend" v-for="amount in address.spend" :key="amount.year">
                         {{amount.amount}}
                     </td>

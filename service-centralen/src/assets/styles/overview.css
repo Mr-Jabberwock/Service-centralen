@@ -7,12 +7,27 @@
 }
 
 .overview__table {
-  width: 100%;
+  margin-top: 10%;
+  margin-left: 5%;
+  width: 90%;
   padding: 2rem;
   border-collapse: collapse;
 }
 
 .overview__head {
   border-bottom: 1px black solid;
+}
+
+.overview__body {
+  width: 100px;
+}
+
+.overview .address__id {
+  padding-bottom: 10px;
+  border-right: 1px black solid;
+}
+
+.overview .spend {
+  padding-bottom: 10px;
 }
 /*# sourceMappingURL=overview.css.map */
