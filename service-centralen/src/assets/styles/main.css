@@ -265,12 +265,23 @@ ul {
   border-bottom: 1px black solid;
 }
 
+.overview th {
+  padding-bottom: 10px;
+}
+
 .overview__body {
   width: 100px;
 }
 
+.overview td {
+  padding-top: 10px;
+}
+
+.overview .head-address {
+  border-right: 1px black solid;
+}
+
 .overview .address__id {
-  padding-bottom: 10px;
   border-right: 1px black solid;
 }
 
