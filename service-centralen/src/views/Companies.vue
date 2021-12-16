@@ -103,6 +103,8 @@ export default{
         document.body.style.backgroundPositionY = "200px"
     }
     this.sortByYear();
+
+    this.$store.dispatch("GET_OFFERS")
     },
    methods: {
        openCompany(obj){

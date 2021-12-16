@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -7,7 +8,8 @@ export default new Vuex.Store({
   state: {
     companyPurchases: [],
     companyObj: {},
-    page:"company"
+    page:"company",
+    offers: []
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
@@ -18,13 +20,17 @@ export default new Vuex.Store({
     },
     SET_PAGE(state, res){
       state.page = res;
+    },
+    SET_OFFERS(state, offers){
+      console.log(offers)
+      state.offers = offers;
     }
   },
   actions: {
-    setCompanyPurchases(state){
-
-      state.commit("SET_COMPANY_PURCHASES", ["howdy"])
-       
+    GET_OFFERS(state){
+      axios.get('https://guarded-plateau-77693.herokuapp.com/api/offers').then((response) => {
+        state.commit("SET_OFFERS", response.data)
+      })
     }
   },
   modules: {
