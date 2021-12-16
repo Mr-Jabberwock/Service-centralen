@@ -105,8 +105,13 @@ export default{
     this.sortByYear();
 
     this.$store.dispatch("GET_OFFERS")
+
+   
     },
    methods: {
+       email(){
+           window.open('mailto:test@example.com');
+       },
        openCompany(obj){
            this.companyOpen = true;
            this.$store.commit("SET_COMPANY_OBJECT", obj);
