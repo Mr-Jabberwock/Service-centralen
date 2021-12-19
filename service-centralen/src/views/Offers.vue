@@ -5,7 +5,7 @@
 
    <transition name="pop" appear>
         <div class="modal" role="dialog">
-            <CompanyDetails :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CompanyDetails>
+            <CreateOffer :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CreateOffer>
         </div>
     </transition>
     <transition name="fade" appear>
@@ -19,12 +19,12 @@
 
 <script>
 import Header from "../components/Header.vue"
-import CompanyDetails from "../components/CompanyDetails.vue"
+import CreateOffer from "../components/CreateOffer.vue"
 export default{
     name: "Offer", 
     components:{
         Header,
-        CompanyDetails
+        CreateOffer
     },
     data(){
         return{

@@ -109,9 +109,6 @@ export default{
    
     },
    methods: {
-       email(){
-           window.open('mailto:test@example.com');
-       },
        openCompany(obj){
            this.companyOpen = true;
            this.$store.commit("SET_COMPANY_OBJECT", obj);

@@ -28,9 +28,20 @@ export default new Vuex.Store({
   },
   actions: {
     GET_OFFERS(state){
-      axios.get('https://guarded-plateau-77693.herokuapp.com/api/offers').then((response) => {
+      axios.get('https://guarded-plateau-77693.herokuapp.com/api/offers')
+      .then((response) => {
         state.commit("SET_OFFERS", response.data)
       })
+    },
+    CREATE_OFFER(state, offer){
+       axios.post('https://service-centralen.herokuapp.com/offers', offer)
+       .then((res) =>{
+         console.log(res)
+         state.commit("SET_OFFER", offer);
+       })
+       .catch(function (error) {
+        console.log(error);
+      });
     }
   },
   modules: {
