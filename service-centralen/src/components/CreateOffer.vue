@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
+    <div class="newOffer">
         <h2>Tilføj tilbud</h2>
 
-        <div>
+        <div class="newOffer__searchfield">
             <h2>Title</h2>
             <input v-model="title" type="text">
         </div>
 
-        <div>
+        <div class="newOffer__dates">
             <div>
                 <h2>Fra:</h2>
                 <input v-model="fromDate" type="date">
@@ -18,9 +18,9 @@
             </div>
         </div>
 
-        <div>
+        <div class="newOffer__description">
             <h2>Beskrivelse</h2>
-            <textarea v-model="description"/>
+            <textarea v-model="description" class="description__text"/>
         </div>
         <button v-on:click="saveOffer()">Gem</button>
     </div>

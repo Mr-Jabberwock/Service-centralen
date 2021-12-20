@@ -28,7 +28,7 @@ export default new Vuex.Store({
   },
   actions: {
     GET_OFFERS(state){
-      axios.get('https://guarded-plateau-77693.herokuapp.com/api/offers')
+      axios.get('https://service-centralen.herokuapp.com/offers')
       .then((response) => {
         state.commit("SET_OFFERS", response.data)
       })
@@ -42,7 +42,26 @@ export default new Vuex.Store({
        .catch(function (error) {
         console.log(error);
       });
+    },
+    UPDATE_OFFER(state, offer){
+      axios.put('https://service-centralen.herokuapp.com/offers/' + offer.id, offer).then((res) =>{
+        console.log(res)
+        state.commit("UPDATE_OFFER", offer);
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    },
+    DELETE_OFFER(state, id){
+      axios.delete('https://service-centralen.herokuapp.com/offers/' + id).then((res) =>{
+      console.log(res)  
+      state.commit("DELETE_OFFER", id)
+      })
+      .catch(function (error){
+        console.log(error)
+      })
     }
+
   },
   modules: {
   },

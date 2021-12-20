@@ -2,6 +2,8 @@
 <div>
     <Header />
   <button v-on:click="openCreateNew">Ny</button>
+  <button v-on:click="updateOffer">Opdater</button>
+  <button v-on:click="deleteOffer">Slet</button>
 
    <transition name="pop" appear>
         <div class="modal" role="dialog">
@@ -34,6 +36,12 @@ export default{
     methods:{
         openCreateNew(){
              this.companyOpen = true;
+        },
+        updateOffer(){
+            this.$store.dispatch('UPDATE_OFFER', {id: '61bef77eb60e891fecb6b231', Title: 'Spytstægte nudler', Description: 'Med sur sød sovs'} )
+        },
+        deleteOffer(){
+            this.$store.dispatch('DELETE_OFFER', '61bef77eb60e891fecb6b231')
         }
     }
 }
