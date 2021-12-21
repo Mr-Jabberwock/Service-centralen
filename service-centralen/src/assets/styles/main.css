@@ -321,13 +321,39 @@ ul {
 }
 
 .overview__table {
-  width: 100%;
+  margin-top: 10%;
+  margin-left: 5%;
+  width: 90%;
   padding: 2rem;
   border-collapse: collapse;
 }
 
 .overview__head {
   border-bottom: 1px black solid;
+}
+
+.overview th {
+  padding-bottom: 10px;
+}
+
+.overview__body {
+  width: 100px;
+}
+
+.overview td {
+  padding-top: 10px;
+}
+
+.overview .head-address {
+  border-right: 1px black solid;
+}
+
+.overview .address__id {
+  border-right: 1px black solid;
+}
+
+.overview .spend {
+  padding-bottom: 10px;
 }
 
 body {

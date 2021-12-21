@@ -4,15 +4,15 @@
         <table class="overview__table">
             <thead class="overview__head">
                 <tr>
-                    <th> Address ID</th>
+                    <th class="head-address"> Address ID</th>
                     <th class="year" v-for="year in allYears" :key="year" >
                         {{year}}
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="overview__body">
                 <tr class="address" v-for="address in invoices" :key="address">
-                    {{address.companyId}}
+                    <td class="address__id">{{address.companyId}}</td>
                     <td class="spend" v-for="amount in address.spend" :key="amount.year">
                         {{amount.amount}}
                     </td>
