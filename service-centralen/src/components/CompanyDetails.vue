@@ -34,7 +34,16 @@
                 </div>
             </section>
         </div>
-        <button @click="showEmail = true">Send offer</button>
+        <select @change="offerElected" v-model="selectedOffer">
+            <option  v-for="offer in offers" :key="offer.companyId">
+                  {{offer.Title}}
+            </option>
+        </select>
+        <div v-for="offer in selectedOffers" :key="offer">
+            <p>{{offer }}</p>
+            <button v-on:click="removeOffer(offer)">X</button>
+        </div>
+        <button v-on:click="openEmailWindow">Send offer</button>
         <transition name="email-fade" appear>
             <div class="email-overlay" 
                 v-if="showEmail" 
@@ -88,13 +97,22 @@ export default {
                 subject: "",
                 body: ""
             },
-            showEmail: false
+            showEmail: false,
+            selectedOffer: "",
+            selectedOffers: []
         }
     },
     computed: {
         choosenCompany(){
             return this.$store.getters.getCompanyObj
+        },
+        offers(){
+            return this.$store.getters.getOffers
         }
+    },
+    mounted(){
+    //console.log()
+       this.$store.dispatch("GET_COMPANIES")
     },
     methods: {
         closeModal(){
@@ -102,6 +120,43 @@ export default {
         },
         sendEmail(){
             window.open(this.outputUrl);
+            //
+            let companyId = ""
+            this.$store.getters.getCompanies.forEach(element => {
+                if(element.CompanyId == this.choosenCompany.companyId){
+                    companyId = element.id
+                }
+            });
+            let offerId = ""
+
+            this.offers.forEach(element => {
+                if(element.Title == this.selectedOffer ){
+                   offerId = element._id;
+                }
+            });   
+
+            const updatedCompany = {id: companyId, offer: offerId}
+            console.log(updatedCompany);
+
+            this.$store.dispatch("UPDATE_COMPANY", updatedCompany)
+        },
+        offerElected(){
+           if(!this.selectedOffers.includes(this.selectedOffer)){
+               this.selectedOffers.push(this.selectedOffer);
+           }
+        },
+        removeOffer(offer){
+            this.selectedOffers.forEach(element =>{
+                var index = this.selectedOffers.indexOf(offer)
+                if(offer == element){
+                    this.selectedOffers.splice(index, 1)
+                }
+            })
+        },
+        openEmailWindow(){
+            this.showEmail = true;
+            this.email.body = this.selectedOffer
+
         },
         updateOutputUrl() {
             this.outputUrl = "mailto:" + this.emailId;
