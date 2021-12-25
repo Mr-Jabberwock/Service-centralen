@@ -88,7 +88,7 @@ export default new Vuex.Store({
     },
     UPDATE_COMPANY(state, company){
       console.log(company)
-      axios.put('https://service-centralen.herokuapp.com/companies/' + company.id, {offers: [company.offer]}).then(()=>{
+      axios.put('https://service-centralen.herokuapp.com/companies/' + company.id, {offers: company.offer}).then(()=>{
         state.commit("UPDATE_COMPANY");
       })
       .catch((error) =>{

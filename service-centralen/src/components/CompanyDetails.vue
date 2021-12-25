@@ -127,16 +127,16 @@ export default {
                     companyId = element.id
                 }
             });
-            let offerId = ""
+            let offerIds = []
 
             this.offers.forEach(element => {
-                if(element.Title == this.selectedOffer ){
-                   offerId = element._id;
+                if(this.selectedOffers.includes(element.Title) ){
+                   offerIds.push(element._id);
                 }
             });   
 
-            const updatedCompany = {id: companyId, offer: offerId}
-            console.log(updatedCompany);
+            const updatedCompany = {id: companyId, offer: offerIds}
+
 
             this.$store.dispatch("UPDATE_COMPANY", updatedCompany)
         },
@@ -155,7 +155,12 @@ export default {
         },
         openEmailWindow(){
             this.showEmail = true;
-            this.email.body = this.selectedOffer
+            let body = "Vi vil gerne tilbyde jer følgende tilbud:"
+            this.selectedOffers.forEach(element =>{
+                body += "\n " + element
+            })
+            this.email.body = body;
+            
 
         },
         updateOutputUrl() {
