@@ -10,7 +10,8 @@ export default new Vuex.Store({
     companyObj: {},
     page:"company",
     offers: [],
-    offer: {}
+    offer: {},
+    companies: []
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
@@ -28,6 +29,14 @@ export default new Vuex.Store({
     },
     SET_OFFER(state, offer){
       state.offer = offer
+    },
+    CREATE_COMPANY(state, company){
+      console.log(company)
+      state.companies.push(company)
+    },
+    SET_COMPANIES(state, companies){
+      console.log(companies)
+      state.companies = companies.data;
     }
   },
   actions: {
@@ -43,7 +52,7 @@ export default new Vuex.Store({
          console.log(res)
          state.commit("SET_OFFER", offer);
        })
-       .catch(function (error) {
+       .catch((error) =>{
         console.log(error);
       });
     },
@@ -52,7 +61,7 @@ export default new Vuex.Store({
         console.log(res)
         state.commit("UPDATE_OFFER", offer);
       })
-      .catch(function (error) {
+      .catch((error) =>{
         console.log(error)
       })
     },
@@ -61,7 +70,32 @@ export default new Vuex.Store({
       console.log(res)  
       state.commit("DELETE_OFFER", id)
       })
-      .catch(function (error){
+      .catch((error) =>{
+        console.log(error)
+      })
+    },
+    CREATE_COMPANY(state, company){
+      axios.post('https://service-centralen.herokuapp.com/companies', company).then(()=>{
+        state.commit("CREATE_COMPANY", company);
+      })
+      .catch((error) =>{
+        console.log(error)
+      })
+    },
+    GET_COMPANIES(state){
+      axios.get('https://service-centralen.herokuapp.com/companies').then((res) =>{
+        state.commit("SET_COMPANIES", res);
+      })
+      .catch((error) =>{
+        console.log(error)
+      })
+    },
+    UPDATE_COMPANY(state, company){
+      console.log(company)
+      axios.put('https://service-centralen.herokuapp.com/companies/' + company.id, {offers: company.offer}).then(()=>{
+        state.commit("UPDATE_COMPANY");
+      })
+      .catch((error) =>{
         console.log(error)
       })
     }
@@ -84,6 +118,9 @@ export default new Vuex.Store({
     },
     getOffer(state){
       return state.offer;
+    },
+    getCompanies(state){
+      return state.companies;
     }
   }
 })

@@ -103,9 +103,6 @@ export default{
         document.body.style.backgroundPositionY = "200px"
     }
     this.sortByYear();
-
-    this.$store.dispatch("GET_OFFERS")
-
    
     },
    methods: {
@@ -143,6 +140,7 @@ export default{
                 
                 this.invoices = objs;
                 this.$store.commit("SET_COMPANY_PURCHASES", objs);
+                this.$store.dispatch("GET_OFFERS")
                 
                 this.sortByYear();  
 
@@ -181,16 +179,20 @@ export default{
 
                     if(!exists){
                         result[elementPos].years.push({year: year, amount:el.price})
-                        console.log("exists: ", exists);
                     }
                     else{
                         let index = result[elementPos].years.findIndex(x => x.year == year);
                         result[elementPos].years[index].amount += el.price;
                     }
                 }
+                
                 //result.years.sort((a,b) => {a.year - b.year});
             }
-            console.log(result);
+            
+            //Insert the unique companies into the Strapi database
+            result.forEach(element =>{
+                this.$store.dispatch("CREATE_COMPANY", {CompanyId: element.companyId.toString(), Address: element.address })
+            })
             
 
             this.companies = result;
