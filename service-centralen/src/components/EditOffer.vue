@@ -1,0 +1,60 @@
+<template>
+    <div class="editOffer">
+        <h2>Rediger tilbud</h2>
+        <div class="editOffer__searchfield">
+            <h2>Title</h2>
+            <input v-model="title" type="text">
+        </div>
+        {{this.offer}}
+        <div class="editOffer__dates">
+            <div>
+                <h2>Fra:</h2>
+                <input v-model="fromDate" type="date">
+            </div>
+            <div>
+                <h2>Til:</h2>
+                <input v-model="toDate" type="date">
+            </div>
+        </div>
+
+        <div class="editOffer__description">
+            <h2>Beskrivelse</h2>
+            <textarea v-model="description" class="description__text"/>
+        </div>
+        <button v-on:click="saveOffer()">Gem</button>
+    </div>
+</template>
+<script>
+export default{
+    name: "CreateOffer",
+    data(){
+        return{
+            title: "",
+            description: "",
+            fromDate: "",
+            toDate: ""
+        }
+    },
+    methods:{
+
+        saveOffer(){
+            var offer = {Title: this.title, Description: this.description}//fromDate: this.fromDate, toDate: this.toDate
+            this.$store.dispatch("UPDATE_OFFER", offer)
+        }
+       
+    },
+    computed:{
+        offer(){
+            return this.$store.getters.getOffer;
+        }
+    },
+    created(){
+        this.title = this.offer.Title;
+        this.description = this.offer.Description;
+    }
+}
+</script>
+
+<style lang="scss">
+@import "../assets/styles/editOffer";
+</style>

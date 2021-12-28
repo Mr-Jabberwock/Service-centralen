@@ -9,7 +9,8 @@ export default new Vuex.Store({
     companyPurchases: [],
     companyObj: {},
     page:"company",
-    offers: []
+    offers: [],
+    offer: {}
   },
   mutations: {
     SET_COMPANY_PURCHASES(state, payload){
@@ -22,8 +23,11 @@ export default new Vuex.Store({
       state.page = res;
     },
     SET_OFFERS(state, offers){
-      console.log(offers)
+      //console.log(offers)
       state.offers = offers;
+    },
+    SET_OFFER(state, offer){
+      state.offer = offer
     }
   },
   actions: {
@@ -74,6 +78,12 @@ export default new Vuex.Store({
     },
     getPage(state){
       return state.page;
+    },
+    getOffers(state){
+      return state.offers;
+    },
+    getOffer(state){
+      return state.offer;
     }
   }
 })
