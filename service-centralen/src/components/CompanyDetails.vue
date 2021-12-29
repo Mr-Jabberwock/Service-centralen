@@ -34,16 +34,20 @@
                 </div>
             </section>
         </div>
-        <select @change="offerElected" v-model="selectedOffer">
+        <div class="offer">
+            <select class="offerSelection" @change="offerElected" v-model="selectedOffer">
             <option  v-for="offer in offers" :key="offer.companyId">
                   {{offer.Title}}
             </option>
-        </select>
-        <div v-for="offer in selectedOffers" :key="offer">
-            <p>{{offer }}</p>
-            <button v-on:click="removeOffer(offer)">X</button>
+            </select>
+            <div class="offerMenu" v-for="offer in selectedOffers" :key="offer">
+                <p>{{offer }}</p>
+                <button v-on:click="removeOffer(offer)">X</button>
+            </div>
         </div>
-        <button v-on:click="openEmailWindow">Send offer</button>
+        <div class="sendMail">
+            <button class="sendMail__button" v-on:click="openEmailWindow">Gem</button>
+        </div>
         <transition name="email-fade" appear>
             <div class="email-overlay" 
                 v-if="showEmail" 
@@ -182,3 +186,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+@import "../assets/styles/companyDetails";
+</style>

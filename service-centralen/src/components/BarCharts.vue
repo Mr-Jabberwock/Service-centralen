@@ -4,7 +4,7 @@
          <div class="barchart-header__content">
             <h3 v-if="search === 'number'" class="barchart-header__text">Omsætning i bestemt adresse</h3>
             <h3 v-if="search === 'year'" class="barchart-header__text">Omsætning i bestemt år</h3>
-            <input class="barchart-header__input" v-if="search === 'number'" type="text" v-model="searchNumber" v-on:keyup.enter="computeByCustomerNumber "/>
+            <input class="barchart-header__input" v-if="search === 'number'" type="text" v-model="searchAddress" v-on:keyup.enter="computeByCustomerAddress "/>
             <input class="barchart-header__input" v-if="search === 'year'" type="text" v-model="searchYear" v-on:keyup.enter="computeByYear "/>
          </div>
      </div>
@@ -26,7 +26,7 @@ export default {
     data(){
         return{
             currrentInvoices: this.invoices,
-            searchNumber: "",
+            searchAddress: "",
             searchYear: "",
             customerStatistic: [],
             total: 0,
@@ -61,19 +61,20 @@ export default {
         }
     },
     methods: {
-        computeByCustomerNumber(){
-            if(this.searchNumber == ""){
+        computeByCustomerAddress(){
+            if(this.searchAddress == ""){
                 return this.customerStatistic = [['Spend', 'Year', { role: 'style' }],
                                 ['0', 0, 'black']];
             }
             const result = [];
             let chartArray = [['Spend', 'Year', { role: 'style' }]];
             let total = 0;
+
             for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
                 const year = el.date.toString().trim().substring(6,10);
-                if(el.companyId == this.searchNumber){
-                    this.options.title = el.companyId + " omsætning pr. år";
+                if(el.address == this.searchAddress){
+                    this.options.title = el.address + " omsætning pr. år";
                     if(!result.some(invoice => invoice.year == year)){
                         result.push({year: year, price: el.price})
                     }
@@ -89,14 +90,10 @@ export default {
 
                 this.total = total;
 
-                // if(i == this.invoices.length -1){
-                    
-                //     for(var j = 0; j < result.length; j++){
-                //         var percentage = (result[j].price / total) * 100;
-                //         result[j].percentage = percentage.toFixed(0)
-                //     }
-                // }
             }
+
+            result.reverse();
+
             result.forEach(element => {
                 chartArray.push([element.year, element.price, '#6B58E2'])
             });

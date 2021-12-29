@@ -1,0 +1,24 @@
+.offers__table{
+    margin-left: 10%;
+    margin-top: 5%;
+    width: 80%;
+    border: solid black 1px;
+    border-collapse: collapse;
+
+    .offers__head{
+        border-bottom: solid black 1px ;
+        
+    }
+
+    .offers__body{
+        border-top: solid black 1px ;
+
+        .body-title, .body-description, .body-fromdate{
+            border-right: solid black 1px ;
+        }
+    }
+
+    .table__edit-delete{
+        display: flex;
+    }
+}

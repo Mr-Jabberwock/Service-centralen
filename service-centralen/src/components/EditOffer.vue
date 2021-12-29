@@ -5,7 +5,7 @@
             <h2>Title</h2>
             <input v-model="title" type="text">
         </div>
-        {{this.offer}}
+        {{offer.Title}}
         <div class="editOffer__dates">
             <div>
                 <h2>Fra:</h2>
@@ -29,28 +29,21 @@ export default{
     name: "CreateOffer",
     data(){
         return{
-            title: "",
-            description: "",
-            fromDate: "",
-            toDate: ""
+            title: this.offer.Title,
+            description: this.offer.Description,
+            fromDate: this.offer.FromDate,
+            toDate: this.offer.ToDate
         }
     },
+    props: {
+        offer: Object
+    },
     methods:{
-
         saveOffer(){
             var offer = {Title: this.title, Description: this.description}//fromDate: this.fromDate, toDate: this.toDate
             this.$store.dispatch("UPDATE_OFFER", offer)
         }
        
-    },
-    computed:{
-        offer(){
-            return this.$store.getters.getOffer;
-        }
-    },
-    created(){
-        this.title = this.offer.Title;
-        this.description = this.offer.Description;
     }
 }
 </script>

@@ -45,7 +45,32 @@
   &__head{
     border-bottom: 1px black solid;
   }
+  
+  
 
+}
+.offer{
+  margin-left: 10%;
+  margin-bottom: 10%;
+  .offerSelection{
+    display: flex;
+    width: 20%;
+    height: 20px;
+  }
+  .offerMenu{
+    display: flex;
+    flex-direction: row;
+  }
+}
+.sendMail{
+  display:flex;
+  justify-content: flex-end;
+  &__button{
+    margin-right: 10%;
+    padding: 10px 20px 10px 20px;
+    background-color: green;
+    color: white;
+  }
 }
 .last-payment{
   padding: 1rem;
@@ -58,6 +83,7 @@
   visibility: visible;
   transform: translateX(0%);
 }
+
 .email-modal {
   position: absolute;
   position: fixed;

@@ -2,23 +2,21 @@
 <div class="offers">
     <Header />
   <button v-on:click="openCreateNew">Ny</button>
-  <button v-on:click="updateOffer">Opdater</button>
-  <button v-on:click="deleteOffer">Slet</button>
 
    <transition name="pop" appear>
         <div class="modal" role="dialog">
-            <CreateOffer :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CreateOffer>
+            <CreateOffer :class="[{visible: createOpen}]" @closeCreateOffer="createOpen = false"></CreateOffer>
         </div>
     </transition>
     <transition name="fade" appear>
         <div class="modal-overlay" 
-            v-show="companyOpen" 
-            @click="companyOpen = false">
+            v-show="createOpen" 
+            @click="createOpen = false">
         </div>
     </transition>
    <transition name="Pop" appear>
         <div class="modal" role="dialog">
-            <EditOffer :class="[{visible: editOpen}]" @closeEditOffer="editOpen = false"></EditOffer>
+            <EditOffer :key="componentKey" :class="[{visible: editOpen}]" :offer="chosenOffer" @closeEditOffer="editOpen = false"></EditOffer>
         </div>
     </transition>
     <transition name="fade" appear>
@@ -28,47 +26,52 @@
         </div>
     </transition> 
     <table class="offers__table">
-        <thead>
-            <tr>
+        <thead class="offers__head">
+            <tr >
                 <th>
-                    Company ID
+                    Titel
                 </th>
                 <th>
-                    Title
+                    Beskrivelse
                 </th>
                 <th>
-                    Description
+                    Fra
                 </th>
                 <th>
-                    Companies
+                    Til
                 </th>
                 <th>
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr v-for="offer in offers" :key="offer" @click="openEditModal(offer)">
-                <td>
-                    <p>
-                        {{offer.CompanyId}}
-                    </p>
-                </td>
-                <td>
+        <tbody class="offers__body">
+            <tr v-for="offer in offers" :key="offer.Title" @click="openEditModal(offer)">
+                <td class="body-title">
                     <p>
                         {{offer.Title}}
                     </p>
                 </td>
-                <td>
+                <td class="body-description">
                     <p>
                         {{offer.Description}}
                     </p>
                 </td>
-                <td>
+                <td class="body-fromdate">
+                    <p>
+                        {{offer.Fromdate}}
+                    </p>
+                </td>
+                <td class="body-todate">
+                    <p>
+                        {{offer.ToDate}}
+                    </p>
+                </td>
+               <!-- <td>
                     <p v-for="company in offer.companies" :key="company">
                         <span>  {{company.Address}} </span>                     
                     </p> 
-                </td>
-                <td>
+                </td>-->
+                <td class="table__edit-delete">
                     <img  @click="openEditModal(offer)" src="../assets/img/pencil.svg">
                     <p class="offers__delete" @click="deleteOffer(offer._id)"> &#x2715;</p>
                 </td>
@@ -92,16 +95,20 @@ export default{
     },
     data(){
         return{
-          companyOpen: false,
-          editOpen: false
+          createOpen: false,
+          editOpen: false,
+          chosenOffer: {},
+          componentKey: 0
         }
     },
     methods:{
         openCreateNew(){
-             this.companyOpen = true;
+             this.createOpen = true;
         },
         openEditModal(offer){
-            this.$store.commit("SET_OFFER", offer);
+            this.chosenOffer = offer
+            this.componentKey = 1;
+            //this.$store.commit("SET_OFFER", offer);
             this.editOpen = true;
         },
         updateOffer(){
@@ -122,4 +129,8 @@ export default{
     }
 }
 </script>
+
+<style lang="scss">
+@import "../assets/styles/offers";
+</style>
 

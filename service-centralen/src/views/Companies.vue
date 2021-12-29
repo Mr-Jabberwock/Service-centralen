@@ -16,12 +16,8 @@
                 <option>Røde</option>
             </select>
             <select class="import-filter__years" v-model="searchYear" @change="sortByYear">
-                <option>2021</option>
-                <option>2020</option>
-                <option>2019</option>
-                <option>2018</option>
-                <option>2017</option>
-                <option>2016</option>
+                <option v-for="year in years" :key="year">{{year}}</option>
+                
             </select>
             <input class="import-filter__search" type="text" v-model="search" v-on:input="searchFilter"/>
         </div>
@@ -56,9 +52,6 @@
     </div>
     
     </div>
-    
-    
-    <!-- <Footer class="footer" /> -->
 
 </div>
 </template>
@@ -79,8 +72,9 @@ export default{
            file: "",
            filter: "Største",
            companyOpen: false,
-           searchYear: 2021,
-           search: ""
+           searchYear: 2021, //LAV DET OM TIL NUVÆRENDE ÅR
+           search: "",
+           years: []
        }
    },
    components: {
@@ -160,6 +154,10 @@ export default{
                 }
                     
                 const year = el.date.toString().trim().substring(6,10);
+                if(!this.years.some(searchYear => year === searchYear)){
+                    this.years.push(year)
+                }
+
                 const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
                 if(result.some(invoice => invoice.companyId === el.companyId)){
                     if(this.searchYear == parseInt(year)){
@@ -186,13 +184,18 @@ export default{
                     }
                 }
                 
-                //result.years.sort((a,b) => {a.year - b.year});
             }
+
+            //
             
             //Insert the unique companies into the Strapi database
             result.forEach(element =>{
+                element.years.reverse()
                 this.$store.dispatch("CREATE_COMPANY", {CompanyId: element.companyId.toString(), Address: element.address })
             })
+
+            console.log(result)
+
             
 
             this.companies = result;
