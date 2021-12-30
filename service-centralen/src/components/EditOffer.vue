@@ -21,7 +21,7 @@
             <h2>Beskrivelse</h2>
             <textarea v-model="description" class="description__text"/>
         </div>
-        <button v-on:click="saveOffer()">Gem</button>
+        <button class="saveButton" v-on:click="saveOffer()">Gem</button>
     </div>
 </template>
 <script>
@@ -40,8 +40,9 @@ export default{
     },
     methods:{
         saveOffer(){
-            var offer = {Title: this.title, Description: this.description}//fromDate: this.fromDate, toDate: this.toDate
+            var offer = {id: this.offer._id, Title: this.title, Description: this.description, FromDate: this.fromDate, ToDate: this.toDate}
             this.$store.dispatch("UPDATE_OFFER", offer)
+            this.$emit("saved")
         }
        
     }

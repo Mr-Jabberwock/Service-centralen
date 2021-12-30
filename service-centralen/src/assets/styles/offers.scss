@@ -1,3 +1,16 @@
+.new-offer{
+    display: flex;
+    margin-top: 5%;
+    width: 100%;
+
+    &__button{
+        background-color: green;
+        margin-left: 80%;
+        height: 30px;
+        width: 10%;
+    }
+}
+
 .offers__table{
     margin-left: 10%;
     margin-top: 5%;
@@ -11,10 +24,24 @@
     }
 
     .offers__body{
-        border-top: solid black 1px ;
+        border-top: solid black 1px;
 
         .body-title, .body-description, .body-fromdate{
-            border-right: solid black 1px ;
+            border-right: solid black 1px;
+            border-bottom: solid black 1px;
+        }
+
+        .body-todate{
+            border-bottom: solid black 1px;
+        }
+
+        .table__edit-delete{
+            border-bottom: solid black 1px;
+            img{
+                max-width: 20px;
+                padding-right: 20px;
+            }
+
         }
     }
 

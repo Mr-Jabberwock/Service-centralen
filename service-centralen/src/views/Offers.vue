@@ -1,11 +1,12 @@
 <template>
 <div class="offers">
     <Header />
-  <button v-on:click="openCreateNew">Ny</button>
-
+    <div class="new-offer">
+        <button class="new-offer__button" v-on:click="openCreateNew">Ny</button>
+    </div>
    <transition name="pop" appear>
         <div class="modal" role="dialog">
-            <CreateOffer :class="[{visible: createOpen}]" @closeCreateOffer="createOpen = false"></CreateOffer>
+            <CreateOffer v-on:closeCreate="closeCreate" :class="[{visible: createOpen}]" @closeCreateOffer="createOpen = false"></CreateOffer>
         </div>
     </transition>
     <transition name="fade" appear>
@@ -16,13 +17,13 @@
     </transition>
    <transition name="Pop" appear>
         <div class="modal" role="dialog">
-            <EditOffer :key="componentKey" :class="[{visible: editOpen}]" :offer="chosenOffer" @closeEditOffer="editOpen = false"></EditOffer>
+            <EditOffer v-on:saved="editSaved" :key="componentKey" :class="[{visible: editOpen}]" :offer="chosenOffer" @closeEditOffer="editOpen = false"></EditOffer>
         </div>
     </transition>
     <transition name="fade" appear>
         <div class="modal-overlay" 
             v-show="editOpen" 
-            @click="editOpen = false">
+            @click="closeEdit">
         </div>
     </transition> 
     <table class="offers__table">
@@ -45,7 +46,7 @@
             </tr>
         </thead>
         <tbody class="offers__body">
-            <tr v-for="offer in offers" :key="offer.Title" @click="openEditModal(offer)">
+            <tr v-for="offer in offers" :key="offer.Title">
                 <td class="body-title">
                     <p>
                         {{offer.Title}}
@@ -58,7 +59,7 @@
                 </td>
                 <td class="body-fromdate">
                     <p>
-                        {{offer.Fromdate}}
+                        {{offer.FromDate}}
                     </p>
                 </td>
                 <td class="body-todate">
@@ -116,11 +117,21 @@ export default{
         },
         deleteOffer(id){
             this.$store.dispatch('DELETE_OFFER', id)
+        },
+        editSaved(){
+            this.editOpen = false;
+            this.componentKey = 2;
+        },
+        closeEdit(){
+            this.editOpen = false;
+            this.componentKey = 2;
+        },
+        closeCreate(){
+            this.createOpen = false;
         }
     },
     computed:{
         offers(){
-            console.log(this.$store.getters.getOffers);
             return this.$store.getters.getOffers;
         }
     },

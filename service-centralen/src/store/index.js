@@ -24,11 +24,12 @@ export default new Vuex.Store({
       state.page = res;
     },
     SET_OFFERS(state, offers){
-      //console.log(offers)
       state.offers = offers;
+      console.log(state.offers)
     },
     SET_OFFER(state, offer){
       state.offer = offer
+      state.offers.push(offer);
     },
     CREATE_COMPANY(state, company){
       console.log(company)
@@ -37,6 +38,20 @@ export default new Vuex.Store({
     SET_COMPANIES(state, companies){
       console.log(companies)
       state.companies = companies.data;
+    },
+    DELETE_OFFER(state, id){
+      let obj = state.offers.findIndex((obj => obj.id == id));
+      state.offers.splice(obj, 1)
+
+    },
+    UPDATE_OFFER(state, offer){
+      let obj = state.offers.findIndex((obj => obj.id == offer.id));
+      state.offers[obj].Title = offer.Title;
+      state.offers[obj].Description = offer.Description;
+      state.offers[obj].FromDate = offer.FromDate;
+      state.offers[obj].ToDate = offer.ToDate;
+
+      console.log(state.offers)
     }
   },
   actions: {
