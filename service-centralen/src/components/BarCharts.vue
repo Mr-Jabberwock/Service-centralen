@@ -67,7 +67,7 @@ export default {
                                 ['0', 0, 'black']];
             }
             const result = [];
-            let chartArray = [['Spend', 'Year', { role: 'style' }]];
+            let chartArray = [];
             let total = 0;
 
             for(var i = 0; i < this.invoices.length; i++){
@@ -92,15 +92,19 @@ export default {
 
             }
 
-            result.reverse();
-
-            result.forEach(element => {
-                chartArray.push([element.year, element.price, '#6B58E2'])
-            });
+            console.log("array",result[0]);
+            for(let j = 0; j < 10; j++){
+                if(result[j] != null){
+                    chartArray.push([result[j].year, result[j].price, '#6B58E2'])
+                }
+            }
+            chartArray.reverse();
+            console.log("ChartArray: ", chartArray);
+            chartArray.unshift(['Spend', 'Year', { role: 'style' }]);
             this.customerStatistic = chartArray;
         },
         computeByYear(){
-            let chartArray = [['Spend', 'Address', { role: 'style' }]];
+            let chartArray = [];
             let companies = this.invoices;
             if(this.searchYear == ""){
                 return this.customerStatistic = [['Spend', 'Address', { role: 'style' }],
@@ -122,13 +126,17 @@ export default {
                     }
                 }
             }
-            for(var j = 0; j < result.length; j++){
-                console.log([result[j].address, result[j].amount, '#6B58E2'])
-                chartArray.push([result[j].address, result[j].amount, '#6B58E2'])
-                
+            result.sort(function(a, b) {return a.amount - b.amount});
+            for(let j = 0; j < 10; j++){
+                if(result[j] != null){
+                    chartArray.push([result[j].address, result[j].amount, '#6B58E2'])
+                }
             }
+            chartArray.reverse();
+            console.log("ChartArray: ", chartArray);
+            chartArray.unshift(['Spend', 'Address', { role: 'style' }]);
             this.customerStatistic = chartArray;
-            console.log(chartArray)
+            console.log(this.searchYear, chartArray)
         }
     }
 }

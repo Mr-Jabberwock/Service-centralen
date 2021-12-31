@@ -67,7 +67,8 @@ export default{
                 total += el.price
 
                 if(i == companies.length -1){
-                    for(var j = 0; j < result.length; j++){
+                    result.sort(function(a, b) {return a.amount - b.amount});
+                    for(var j = 0; j < 10; j++){
                         //var percentage = (result[j].amount / total) * 100;
                         this.data.push([result[j].address, result[j].amount])
                       
@@ -92,7 +93,8 @@ export default{
                     result[index].amount += el.price;
                 }
                 if(i == companies.length -1){
-                    for(var j = 0; j < result.length; j++){
+                    result.sort(function(a, b) {return a.amount - b.amount});
+                    for(var j = 0; j < 10; j++){
                         this.data.push([result[j].address, result[j].amount])
                     }
                 }
