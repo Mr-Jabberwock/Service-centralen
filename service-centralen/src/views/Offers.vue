@@ -15,9 +15,9 @@
             @click="createOpen = false">
         </div>
     </transition>
-   <transition name="Pop" appear>
+   <transition name="pop" appear>
         <div class="modal" role="dialog">
-            <EditOffer v-on:saved="editSaved" :key="componentKey" :class="[{visible: editOpen}]" :offer="chosenOffer" @closeEditOffer="editOpen = false"></EditOffer>
+            <EditOffer v-on:saved="editSaved" :class="[{visible: editOpen}]" :key="componentKey"  :offer="chosenOffer" @closeEditOffer="editOpen = false"></EditOffer>
         </div>
     </transition>
     <transition name="fade" appear>

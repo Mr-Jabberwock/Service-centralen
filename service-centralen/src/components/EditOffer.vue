@@ -26,7 +26,7 @@
 </template>
 <script>
 export default{
-    name: "CreateOffer",
+    name: "EditOffer",
     data(){
         return{
             title: this.offer.Title,
