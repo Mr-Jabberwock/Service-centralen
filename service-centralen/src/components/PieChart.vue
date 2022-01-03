@@ -24,16 +24,15 @@ export default{
     },
     data() {
     return {
-       data: [
-          ['Daily Routine', 'Hours per Day'],
-          
-      ],
-      options: {
-        width: 600,
-        height: 400,
-        backgroundColor: { fill:'transparent' }
-      },
-      searchYear: ""
+        data: [
+          ['Daily Routine', 'Hours per Day'],   
+        ],
+        options: {
+            width: 600,
+            height: 400,
+            backgroundColor: { fill:'transparent' }
+        },
+        searchYear: ""
     };
    },
    props:{
@@ -65,15 +64,12 @@ export default{
                 }
                 
                 total += el.price
-
-                if(i == companies.length -1){
-                    result.sort(function(a, b) {return a.amount - b.amount});
-                    for(var j = 0; j < 10; j++){
-                        //var percentage = (result[j].amount / total) * 100;
-                        this.data.push([result[j].address, result[j].amount])
-                      
-                    }
-                }
+            }
+            result.sort(function(a, b) {return a.amount - b.amount});
+            for(var j = 0; j < 10; j++){
+                //var percentage = (result[j].amount / total) * 100;
+                this.data.push([result[j].address, result[j].amount])
+                
             }
             console.log(total)
             console.log(this.data)
@@ -92,12 +88,10 @@ export default{
                     let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
                     result[index].amount += el.price;
                 }
-                if(i == companies.length -1){
-                    result.sort(function(a, b) {return a.amount - b.amount});
-                    for(var j = 0; j < 10; j++){
-                        this.data.push([result[j].address, result[j].amount])
-                    }
-                }
+            }
+            result.sort(function(a, b) {return a.amount - b.amount});
+            for(var j = 0; j < 10; j++){
+                this.data.push([result[j].address, result[j].amount])
             }
         }
     },
