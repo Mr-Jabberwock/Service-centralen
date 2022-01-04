@@ -48,8 +48,16 @@
 
     }
 
-    &__submit{
-        margin-top: 10%;
+    .submit{
+        display: flex;
+        justify-content:flex-end;
+
+        &__button{
+            margin-right: 10%;
+            margin-top: 20%;
+            background-color: green;
+            padding: 10px 20px 10px 20px;
+        }
     }
 }
 

@@ -24,7 +24,7 @@
     </div>
     <transition name="pop" appear>
         <div class="modal" role="dialog">
-            <CompanyDetails :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CompanyDetails>
+            <CompanyDetails :key="componentKey" :class="[{visible: companyOpen}]" @closeCompanyDetails="companyOpen = false"></CompanyDetails>
         </div>
     </transition>
     <transition name="fade" appear>
@@ -74,7 +74,8 @@ export default{
            companyOpen: false,
            searchYear: 2021, //LAV DET OM TIL NUVÆRENDE ÅR
            search: "",
-           years: []
+           years: [],
+           componentKey: 0
        }
    },
    components: {
@@ -101,9 +102,11 @@ export default{
     },
    methods: {
        openCompany(obj){
-           this.companyOpen = true;
            this.$store.commit("SET_COMPANY_OBJECT", obj);
-           console.log(obj);
+           this.$store.dispatch("GET_COMPANIES");
+           this.companyOpen = true;
+           
+           this.componentKey += 1;
        },
        increasePage(){
            this.currentPage++
@@ -119,10 +122,11 @@ export default{
                 /* Get first worksheet */
                 const workSheetNames = wordBook.SheetNames[0];
                 const workSheet = wordBook.Sheets[workSheetNames];
+
                 /* Convert array of arrays */
                 const data = XLSX.utils.sheet_to_json(workSheet, { header: 1 });
                 
-                var objs = data.map(function(x) { 
+                var objs = data.map((x) => { 
                     return { 
                         invoice: x[0], 
                         date: x[1],

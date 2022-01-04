@@ -5,7 +5,6 @@
             <h2>Title</h2>
             <input v-model="title" type="text">
         </div>
-        {{offer.Title}}
         <div class="editOffer__dates">
             <div>
                 <h2>Fra:</h2>
@@ -21,7 +20,9 @@
             <h2>Beskrivelse</h2>
             <textarea v-model="description" class="description__text"/>
         </div>
-        <button class="saveButton" v-on:click="saveOffer()">Gem</button>
+       <div class="submit">
+            <button class="submit__button" v-on:click="saveOffer()">Gem</button>
+       </div>
     </div>
 </template>
 <script>

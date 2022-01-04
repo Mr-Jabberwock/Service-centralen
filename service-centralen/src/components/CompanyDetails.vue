@@ -35,14 +35,22 @@
             </section>
         </div>
         <div class="offer">
-            <select class="offerSelection" @change="offerElected" v-model="selectedOffer">
-            <option  v-for="offer in offers" :key="offer.companyId">
-                  {{offer.Title}}
-            </option>
-            </select>
-            <div class="offerMenu" v-for="offer in selectedOffers" :key="offer">
-                <p>{{offer }}</p>
-                <button v-on:click="removeOffer(offer)">X</button>
+            <div class="offer__selection">
+                <select class="offerSelection" @change="offerElected" v-model="selectedOffer">
+                <option  v-for="offer in offers" :key="offer.companyId">
+                    {{offer.Title}}
+                </option>
+                </select>
+                <div class="offerMenu" v-for="offer in selectedOffers" :key="offer">
+                    <p>{{offer }}</p>
+                    <button v-on:click="removeOffer(offer)">X</button>
+                </div>
+            </div>
+
+            <div class="offer__list">´
+                 <div v-for="offer in companyOffers.offers" :key="offer._id">
+                        {{offer.Title}}
+                 </div>
             </div>
         </div>
         <div class="sendMail">
@@ -103,7 +111,8 @@ export default {
             },
             showEmail: false,
             selectedOffer: "",
-            selectedOffers: []
+            selectedOffers: [],
+            companyOffers: []
         }
     },
     computed: {
@@ -115,8 +124,15 @@ export default {
         }
     },
     mounted(){
-    //console.log()
-       this.$store.dispatch("GET_COMPANIES")
+       this.$store.dispatch("GET_COMPANIES");
+        var companies = this.$store.getters.getCompanies;
+        for(var i = 0; i < companies.length; i++){
+            if(companies[i].CompanyId == this.choosenCompany.companyId){
+                console.log(companies)
+               this.companyOffers = companies[i]
+            }
+        }
+       
     },
     methods: {
         closeModal(){
