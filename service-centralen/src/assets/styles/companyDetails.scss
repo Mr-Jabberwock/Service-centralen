@@ -73,9 +73,11 @@
     overflow-y: auto;
   }
  
-  .offerMenu{
-    display: flex;
-    flex-direction: row;
+  .offer-menu{
+    &__title{
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 .sendMail{

@@ -37,13 +37,18 @@
         <div class="offer">
             <div class="offer__selection">
                 <select class="offerSelection" @change="offerElected" v-model="selectedOffer">
-                <option  v-for="offer in offers" :key="offer.companyId">
+                <option v-bind:value="{title: offer.Title, description: offer.Description}"  v-for="offer in offers" :key="offer.companyId">
                     {{offer.Title}}
                 </option>
                 </select>
-                <div class="offerMenu" v-for="offer in selectedOffers" :key="offer">
-                    <p>{{offer }}</p>
-                    <button v-on:click="removeOffer(offer)">X</button>
+                <div class="offer-menu" v-for="offer in selectedOffers" :key="offer">
+                    <div class="offer-menu__title">
+                        <p>{{offer.title}}</p>
+                        <button v-on:click="removeOffer(offer)">X</button>
+                    </diV>
+                    <div class="offer-menu__description">
+                         <p>{{offer.description}}</p>
+                    </diV>
                 </div>
             </div>
 

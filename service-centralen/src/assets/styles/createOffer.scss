@@ -24,19 +24,40 @@
         display: flex;
         flex-direction: column;
         margin-left: 10%;
-        width: 30%;
+        width: 25%;
 
-        input{
-            height: 30px;
+        div{
+            display: flex;
+            h2{
+            }
+            input{
+                height: 20px;
+            }
+            p{
+                color: red;
+                margin-left: 5px;
+            }
         }
     }
 
-    &__dates{
+    .dates{
         margin-left: 10%;
         width: 80%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        &__to, &__from{
+            div{
+                display: flex;
+                input{
+                    height: 20px;
+                }
+                p{
+                    margin-left: 5px;
+                    color: red;
+                }
+            }
+        }
     }
 
     &__description{

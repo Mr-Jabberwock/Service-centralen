@@ -4,17 +4,26 @@
 
         <div class="newOffer__searchfield">
             <h2>Title</h2>
-            <input v-model="title" type="text">
+            <div>
+                <input v-model="title" type="text">
+                <p>*</p>
+            </div>
         </div>
 
-        <div class="newOffer__dates">
-            <div>
+        <div class="dates">
+            <div class="dates__from">
                 <h2>Fra:</h2>
-                <input v-model="fromDate" type="date">
+                <div>
+                    <input v-model="fromDate" type="date">
+                    <p>*</p>
+                </div>
             </div>
-            <div>
+            <div class="dates__to">
                 <h2>Til:</h2>
-                <input v-model="toDate" type="date">
+                <div>
+                    <input v-model="toDate" type="date">
+                    <p>*</p>
+                </div>
             </div>
         </div>
 
@@ -25,6 +34,8 @@
         <div class="submit">
             <button class="submit__button" v-on:click="saveOffer()">Gem</button>
         </div>
+        <p v-if="!everythingFilled">Udfyld felterne med den røde stjerne</p>
+
     </div>
 </template>
 
@@ -36,7 +47,8 @@ export default{
             title: "",
             description: "",
             fromDate: "",
-            toDate: ""
+            toDate: "",
+            everythingFilled: true
         }
     },
     methods:{
@@ -44,9 +56,12 @@ export default{
         saveOffer(){
             var offer = {Title: this.title, Description: this.description, FromDate: this.fromDate, ToDate: this.toDate}//
             console.log(offer)
-            this.$store.dispatch("CREATE_OFFER", offer)
-
-            this.$emit("closeCreate")
+            if(this.title != "" && this.fromDate != "" && this.toDate != ""){
+                this.$store.dispatch("CREATE_OFFER", offer)
+                this.$emit("closeCreate")
+            }else{
+                this.everythingFilled = false;
+            }
         }
        
     }
