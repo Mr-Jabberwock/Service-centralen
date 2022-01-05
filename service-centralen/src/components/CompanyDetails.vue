@@ -69,25 +69,28 @@
         <transition name="email-pop" appear>
             <div class="email-modal" 
                 v-if="showEmail" >              
-                    <form>
-                    <label for="target-email-id">Target Email ID</label>
+                    <form class="email-modal__form">
+                    <label class="email-modal__label" for="target-email-id">Email</label>
                     <input
+                        class="email-modal__input"
                         name="target-email-id"
-                        placeholder="Target Email ID"
+                        placeholder="email@email.com"
                         type="email"
                         v-model="emailId"
                         v-on:keyup="updateOutputUrl"
                     />
-                    <label for="subject">Subject</label>
+                    <label class="email-modal__label" for="subject">Subject</label>
                     <input
+                        class="email-modal__input"
                         name="subject"
-                        placeholder="Subject"
+                        placeholder="subject"
                         type="text"
                         v-model="email.subject"
                         v-on:keyup="updateOutputUrl"
                     />
-                    <label for="body">Body</label>
+                    <label class="email-modal__label" for="body">Body</label>
                     <textarea
+                        class="email-modal__textarea"
                         name="body"
                         placeholder="Body"
                         type="text"
@@ -96,8 +99,8 @@
                     ></textarea>
                     <input type="hidden" id="final-link-to-copy" :value="outputUrl" />
                     </form>
-                    <button @click="sendEmail">Send email</button>
-                    <button @click="showEmail = false">Cancel</button>
+                    <button class="email-modal__button--send" @click="sendEmail">Send email</button>
+                    <button class="email-modal__button--cancel" @click="showEmail = false">Cancel</button>
                 </div>
         </transition>
     </div>

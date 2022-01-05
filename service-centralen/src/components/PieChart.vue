@@ -77,7 +77,7 @@ export default{
         computedTotalAmounts(){
             
             let companies = this.$store.getters.getCompanyPurchases;
-
+            console.log(companies);
             let result = [];
             for(var i = 0; i < companies.length; i++){
                 var el = companies[i];

@@ -27,14 +27,25 @@
       -ms-flex-direction: column;
           flex-direction: column;
   margin-left: 10%;
-  width: 30%;
+  width: 25%;
 }
 
-.newOffer__searchfield input {
-  height: 30px;
+.newOffer__searchfield div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.newOffer__dates {
+.newOffer__searchfield div input {
+  height: 20px;
+}
+
+.newOffer__searchfield div p {
+  color: red;
+  margin-left: 5px;
+}
+
+.newOffer .dates {
   margin-left: 10%;
   width: 80%;
   display: -webkit-box;
@@ -49,6 +60,21 @@
           justify-content: space-between;
 }
 
+.newOffer .dates__to div, .newOffer .dates__from div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.newOffer .dates__to div input, .newOffer .dates__from div input {
+  height: 20px;
+}
+
+.newOffer .dates__to div p, .newOffer .dates__from div p {
+  margin-left: 5px;
+  color: red;
+}
+
 .newOffer__description {
   height: 20%;
 }
@@ -56,6 +82,22 @@
 .newOffer__description .description__text {
   width: 80%;
   height: 80%;
+}
+
+.newOffer .submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.newOffer .submit__button {
+  margin-right: 10%;
+  margin-top: 20%;
+  background-color: green;
+  padding: 10px 20px 10px 20px;
 }
 
 .newOffer.visible {

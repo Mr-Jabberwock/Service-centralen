@@ -58,6 +58,22 @@
   height: 80%;
 }
 
+.submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.submit__button {
+  margin-right: 10%;
+  margin-top: 20%;
+  background-color: green;
+  padding: 10px 20px 10px 20px;
+}
+
 .editOffer.visible {
   visibility: visible;
   -webkit-transform: translateX(0%);
