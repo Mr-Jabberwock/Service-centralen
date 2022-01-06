@@ -108,7 +108,7 @@ export default {
             //Reverse the data so that it starts from the earliest year
             chartArray.reverse();
             chartArray.unshift(['Spend', 'Year', { role: 'style' }]);
-            
+
             this.customerStatistic = chartArray;
         },
         computeByYear(){
@@ -141,10 +141,8 @@ export default {
                 }
             }
             chartArray.reverse();
-            console.log("ChartArray: ", chartArray);
             chartArray.unshift(['Spend', 'Address', { role: 'style' }]);
             this.customerStatistic = chartArray;
-            console.log(this.searchYear, chartArray)
         }
     }
 }

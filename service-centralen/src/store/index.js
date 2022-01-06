@@ -25,18 +25,15 @@ export default new Vuex.Store({
     },
     SET_OFFERS(state, offers){
       state.offers = offers;
-      console.log(state.offers)
     },
     SET_OFFER(state, offer){
       state.offer = offer
       state.offers.push(offer);
     },
     CREATE_COMPANY(state, company){
-      console.log(company)
       state.companies.push(company)
     },
     SET_COMPANIES(state, companies){
-      console.log(companies)
       state.companies = companies.data;
     },
     DELETE_OFFER(state, id){
@@ -50,13 +47,6 @@ export default new Vuex.Store({
       state.offers[obj].Description = offer.Description;
       state.offers[obj].FromDate = offer.FromDate;
       state.offers[obj].ToDate = offer.ToDate;
-
-      console.log(state.offers)
-    },
-    UPDATE_COMPANY(state, company){
-      console.log(state)
-      console.log(company)
-
     }
   },
   actions: {
@@ -68,8 +58,7 @@ export default new Vuex.Store({
     },
     CREATE_OFFER(state, offer){
        axios.post('https://service-centralen.herokuapp.com/offers', offer)
-       .then((res) =>{
-         console.log(res)
+       .then(() =>{
          state.commit("SET_OFFER", offer);
        })
        .catch((error) =>{
@@ -77,8 +66,7 @@ export default new Vuex.Store({
       });
     },
     UPDATE_OFFER(state, offer){
-      axios.put('https://service-centralen.herokuapp.com/offers/' + offer.id, offer).then((res) =>{
-        console.log(res)
+      axios.put('https://service-centralen.herokuapp.com/offers/' + offer.id, offer).then(() =>{
         state.commit("UPDATE_OFFER", offer);
       })
       .catch((error) =>{
@@ -86,8 +74,7 @@ export default new Vuex.Store({
       })
     },
     DELETE_OFFER(state, id){
-      axios.delete('https://service-centralen.herokuapp.com/offers/' + id).then((res) =>{
-      console.log(res)  
+      axios.delete('https://service-centralen.herokuapp.com/offers/' + id).then(() =>{
       state.commit("DELETE_OFFER", id)
       })
       .catch((error) =>{
