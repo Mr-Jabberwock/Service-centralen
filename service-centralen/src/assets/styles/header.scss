@@ -1,14 +1,12 @@
 .header{
     width: 100%;
     height: 50px;
-    background-color: black;
-    opacity: 70%;
+    background-color: #4d4d4d;
 
     &__content{
         opacity: 100%;
         color: white;
-        width: 30%;
-        height: 100%;
+        height: 50px;
         display: flex;
         justify-content: space-around;
         //padding-top: 15px;
@@ -22,13 +20,27 @@
         align-items: center;
         justify-items: center;
         cursor: pointer;
+        background-color: black;
+        height: 50px;
+        width: 10%;
+    }
+    &__img{
+        width: 80%;
+        margin: 0 auto;
+
     }
     &__nav{
         display: flex;
         align-items: center;
         justify-items: center;
         padding: 1rem;
-
+        &--last{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            padding: 1rem;
+            margin-right: auto;
+        }
     }
     &__link{
         cursor: pointer;

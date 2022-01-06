@@ -1,11 +1,11 @@
 <template>
    <div class="header">
        <div class="header__content">
-           <div @click="goToCompany" class="header__logo">LOGO</div>
+           <div @click="goToCompany" class="header__logo"><img class="header__img" src="../assets/img/service-centralen-logo.png"></div>
            <div class="header__nav" :class="{ active: page == '' }"><a class="header__link" @click="goToCompany">Firmaer</a></div>
            <div class="header__nav" :class="{ active: page == 'statistics' }"><a class="header__link" @click="goToStatistics">Statestikker</a></div>
            <div class="header__nav" :class="{ active: page == 'overview' }"><a class="header__link" @click="goToOverview">Oversigt</a></div>
-           <div class="header__nav" :class="{ active: page == 'offers' }"><a class="header__link" @click="goToOffers">Tilbud</a></div>
+           <div class="header__nav--last" :class="{ active: page == 'offers' }"><a class="header__link" @click="goToOffers">Tilbud</a></div>
        </div>
    </div>
 </template>
