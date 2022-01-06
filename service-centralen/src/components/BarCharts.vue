@@ -43,6 +43,7 @@ export default {
         search: String
     },
     created() {
+        //On creation define which verison of the of the bar chart this instance of the component will be.
         if(this.search === 'number'){
             this.customerStatistic = [['Spend', 'Year', { role: 'style' }],
                                     ['0', 0, 'black']]
@@ -69,17 +70,23 @@ export default {
             const result = [];
             let chartArray = [];
             let total = 0;
-
+            //iterate through the invoices
             for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
+
+                //Get the year from the invoice dates
                 const year = el.date.toString().trim().substring(6,10);
+
+                //if the address is what is being searched for
                 if(el.address == this.searchAddress){
                     this.options.title = el.address + " omsætning pr. år";
+                    //if a given year does not yet exist in the result array, add it
                     if(!result.some(invoice => invoice.year == year)){
                         result.push({year: year, price: el.price})
                     }
-                    const elementPos = result.map((x) => {return x.year; }).indexOf(year);
 
+                    const elementPos = result.map((x) => {return x.year; }).indexOf(year);
+                    //if the year already exsists in the result array, sum up the price
                     if(result.some(invoice => invoice.year == year)){
                         result[elementPos].price += el.price
                         total += el.price;
@@ -91,16 +98,17 @@ export default {
                 this.total = total;
 
             }
-
-            console.log("array",result[0]);
-            for(let j = 0; j < 10; j++){
+            
+            //append the results to the chartArray
+            for(var j = 0; j < 10; j++){
                 if(result[j] != null){
                     chartArray.push([result[j].year, result[j].price, '#6B58E2'])
                 }
             }
+            //Reverse the data so that it starts from the earliest year
             chartArray.reverse();
-            console.log("ChartArray: ", chartArray);
             chartArray.unshift(['Spend', 'Year', { role: 'style' }]);
+            
             this.customerStatistic = chartArray;
         },
         computeByYear(){

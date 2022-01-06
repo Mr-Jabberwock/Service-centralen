@@ -37,23 +37,27 @@
         <div class="offer">
             <div class="offer__selection">
                 <select class="offerSelection" @change="offerElected" v-model="selectedOffer">
-                <option v-bind:value="{title: offer.Title, description: offer.Description}"  v-for="offer in offers" :key="offer.companyId">
-                    {{offer.Title}}
-                </option>
+                    <option v-bind:value="{title: offer.Title, description: offer.Description, fromDate: offer.FromDate, toDate: offer.ToDate}"  v-for="offer in offers" :key="offer.companyId">
+                        {{offer.Title}}
+                    </option>
                 </select>
-                <div class="offer-menu" v-for="offer in selectedOffers" :key="offer">
+                <div class="offer-menu" v-for="offer in selectedOffers" :key="offer.Title">
                     <div class="offer-menu__title">
                         <p>{{offer.title}}</p>
-                        <button v-on:click="removeOffer(offer)">X</button>
+                        <p class="delete-item" v-on:click="removeOffer(offer)"> X</p>
                     </diV>
                     <div class="offer-menu__description">
                          <p>{{offer.description}}</p>
                     </diV>
+                    <div class="offer-menu__dates">
+                         <p>Fra: {{offer.fromDate}}</p>
+                         <p>Til: {{offer.toDate}}</p>
+                    </diV>
                 </div>
             </div>
 
-            <div class="offer__list">´
-                 <div v-for="offer in companyOffers.offers" :key="offer._id">
+            <div class="offer__list">
+                 <div v-for="offer in companyOffers" :key="offer._id">
                         {{offer.Title}}
                  </div>
             </div>
@@ -130,14 +134,18 @@ export default {
         offers(){
             return this.$store.getters.getOffers
         }
+        
     },
     mounted(){
        this.$store.dispatch("GET_COMPANIES");
+
         var companies = this.$store.getters.getCompanies;
+        //iterate through companies
         for(var i = 0; i < companies.length; i++){
+            //find the current company
             if(companies[i].CompanyId == this.choosenCompany.companyId){
-                console.log(companies)
-               this.companyOffers = companies[i]
+                //get the offers from said company
+                this.companyOffers = companies[i].offers;
             }
         }
        
@@ -148,32 +156,41 @@ export default {
         },
         sendEmail(){
             window.open(this.outputUrl);
-            //
+            //iterate through the companies
             let companyId = ""
             this.$store.getters.getCompanies.forEach(element => {
+                //find the company where the id matches that of the chosen company
                 if(element.CompanyId == this.choosenCompany.companyId){
+                    //set the id from that database
                     companyId = element.id
                 }
             });
             let offerIds = []
-
+            //iterate through the offers
             this.offers.forEach(element => {
-                if(this.selectedOffers.includes(element.Title) ){
+                //if it finds the offers in the slected offers array, tag da ID'et og tilføj det til offer id arrayet
+                //this is to get the ids for the database update
+                if(this.selectedOffers.filter(e => e.title === element.Title).length > 0 ){
                    offerIds.push(element._id);
+                }
+                //if it finds the offer in the company offers array, ad this to the offer ids as well
+                //this is so that the old data won't be overwritten in the update
+                if(this.companyOffers.filter(e => e.Title === element.Title).length > 0 ){
+                    offerIds.push(element._id);
                 }
             });   
 
             const updatedCompany = {id: companyId, offer: offerIds}
-
-
             this.$store.dispatch("UPDATE_COMPANY", updatedCompany)
         },
         offerElected(){
+           //check that the selected offer hasn't already been given
            if(!this.selectedOffers.includes(this.selectedOffer)){
                this.selectedOffers.push(this.selectedOffer);
            }
         },
         removeOffer(offer){
+            //remove an offer from the selected offers array
             this.selectedOffers.forEach(element =>{
                 var index = this.selectedOffers.indexOf(offer)
                 if(offer == element){
@@ -182,12 +199,16 @@ export default {
             })
         },
         openEmailWindow(){
+            //create the email body and title
             this.showEmail = true;
+            let title = "Vi har et tilbud til jer"
             let body = "Vi vil gerne tilbyde jer følgende tilbud:"
+            //iterate through the selected offers and add them to the email body
             this.selectedOffers.forEach(element =>{
-                body += "\n " + element
+                body += "\n " + element.title + "\n    " + element.description + "\n fra: " + element.fromDate+ " til: " + element.toDate+ "\n"
             })
             this.email.body = body;
+            this.email.subject = title;
             
 
         },

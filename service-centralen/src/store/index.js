@@ -52,6 +52,11 @@ export default new Vuex.Store({
       state.offers[obj].ToDate = offer.ToDate;
 
       console.log(state.offers)
+    },
+    UPDATE_COMPANY(state, company){
+      console.log(state)
+      console.log(company)
+
     }
   },
   actions: {
@@ -106,9 +111,8 @@ export default new Vuex.Store({
       })
     },
     UPDATE_COMPANY(state, company){
-      console.log(company)
       axios.put('https://service-centralen.herokuapp.com/companies/' + company.id, {offers: company.offer}).then(()=>{
-        state.commit("UPDATE_COMPANY");
+        state.commit("UPDATE_COMPANY", company);
       })
       .catch((error) =>{
         console.log(error)

@@ -5,6 +5,7 @@
             <h2>Title</h2>
             <input v-model="title" type="text">
         </div>
+
         <div class="editOffer__dates">
             <div>
                 <h2>Fra:</h2>

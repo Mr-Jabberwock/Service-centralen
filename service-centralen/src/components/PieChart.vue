@@ -25,7 +25,7 @@ export default{
     data() {
     return {
         data: [
-          ['Daily Routine', 'Hours per Day'],   
+          ['Total amount', 'Amount of the income'],   
         ],
         options: {
             width: 600,
@@ -45,39 +45,40 @@ export default{
    },
     methods:{
         companiesByYear(){
-            this.data = [['Daily Routine', 'Hours per Day']]
+            //set the first element in the data array of arrays
+            this.data = [['Total amount', 'Amount of the income']]
             let companies = this.allCompanies;
-
+             
             let result = [];
-            let total = 0;
             for(var i = 0; i < companies.length; i++){
                 var el = companies[i];
-                 const year = el.date.toString().trim().substring(6,10);
+                const year = el.date.toString().trim().substring(6,10);
+                //if the the year is the search year
                 if(year == this.searchYear){
+                    //check if the company id exists in the result array. If not, add it
                     if(!result.some(company => company.companyId === el.companyId)){
                     result.push({ companyId: el.companyId, address: el.address, amount: 0, ancle: 0})
                     }
+                    //if the company id do exist sum up the price
                     if(result.some(company => company.companyId === el.companyId)){
                         let index = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
                         result[index].amount += el.price;
                     }
                 }
-                
-                total += el.price
+
             }
+
+             //sort by size. We only want the results of the 10 largest. Otherwise it would get too crowded with data
             result.sort(function(a, b) {return a.amount - b.amount});
+            //push the first 10 (the 10 largest due to the sort) to the data array
             for(var j = 0; j < 10; j++){
-                //var percentage = (result[j].amount / total) * 100;
                 this.data.push([result[j].address, result[j].amount])
                 
             }
-            console.log(total)
-            console.log(this.data)
         },
         computedTotalAmounts(){
             
             let companies = this.$store.getters.getCompanyPurchases;
-            console.log(companies);
             let result = [];
             for(var i = 0; i < companies.length; i++){
                 var el = companies[i];
@@ -89,6 +90,7 @@ export default{
                     result[index].amount += el.price;
                 }
             }
+
             result.sort(function(a, b) {return a.amount - b.amount});
             for(var j = 0; j < 10; j++){
                 this.data.push([result[j].address, result[j].amount])
@@ -96,6 +98,7 @@ export default{
         }
     },
     created(){
+        //if the diagram is not meant to be searchable, use the total amount method
         if(this.search == false){
             this.computedTotalAmounts();
         }

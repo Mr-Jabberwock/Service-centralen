@@ -45,9 +45,6 @@
   &__head{
     border-bottom: 1px black solid;
   }
-  
-  
-
 }
 .offer{
   margin-left: 10%;
@@ -77,6 +74,12 @@
     &__title{
       display: flex;
       flex-direction: row;
+      justify-content: center;
+
+      .delete-item{
+        margin-left: 5px;
+        color: red;
+      }
     }
   }
 }
