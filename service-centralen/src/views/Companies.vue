@@ -47,8 +47,8 @@
         </li>
         
     </ul>
-    <div class="bottom-image">
-        <button class="load-button" @click="increasePage">Indlæs 8 mere</button>
+    <div class="show-more">
+        <button class="load-button" @click="increasePage">Indlæs 4 mere</button>
     </div>
     
     </div>
@@ -72,7 +72,7 @@ export default{
            file: "",
            filter: "Største",
            companyOpen: false,
-           searchYear: 2021, //LAV DET OM TIL NUVÆRENDE ÅR
+           searchYear: "2021",
            search: "",
            years: [],
            componentKey: 0
@@ -86,17 +86,16 @@ export default{
    },
    computed: {
        toBeShown(){
+           //return the calculated amount of entries to be shown
            return this.companies.slice(0, this.currentPage * 4)
        }
-    //    ,
-    //    companies(){
-    //        return this.$store.getters.getCompanyPurchases;
-    //    }
    },
     created(){
     if(this.$store.getters.getPage == ""){
         document.body.style.backgroundPositionY = "200px"
     }
+
+    //sort by year as a default
     this.sortByYear();
    
     },
@@ -109,23 +108,25 @@ export default{
            this.componentKey += 1;
        },
        increasePage(){
+           //increase amount of entries shown
            this.currentPage++
        },
        uploadFile(event){
            this.file = event.target.files[0]
            const reader = new FileReader();
            reader.onload = (e) => {
-                /* Parse data. XLSX is an imported library */
+                //Parse data. XLSX is an imported library 
                 const binaryStr = e.target.result;
                 const wordBook = XLSX.read(binaryStr, { type: 'binary' });
                 
-                /* Get first worksheet */
+                // Get first worksheet 
                 const workSheetNames = wordBook.SheetNames[0];
                 const workSheet = wordBook.Sheets[workSheetNames];
 
-                /* Convert array of arrays */
+                // Convert array of arrays 
                 const data = XLSX.utils.sheet_to_json(workSheet, { header: 1 });
                 
+                //convert array of arrays to array of objects
                 var objs = data.map((x) => { 
                     return { 
                         invoice: x[0], 
@@ -140,6 +141,7 @@ export default{
                 this.$store.commit("SET_COMPANY_PURCHASES", objs);
                 this.$store.dispatch("GET_OFFERS")
                 
+                //sort by year as a default
                 this.sortByYear();  
 
             }  
@@ -149,20 +151,25 @@ export default{
        sortByYear(){
 
             const result = [];
-
+             //iterate throught invoices
              for(var i = 0; i < this.invoices.length; i++){
                 var el = this.invoices[i];
+                //if the company id is new, add it to the result array
                 if(!result.some(invoice => invoice.companyId === el.companyId)){
                     result.push({ invoice: el.invoice, date: el.date, companyId: el.companyId, address: el.address, price: 0, year2: 0, year1: 0, years:[]
                     })
                 }
-                    
+                
+                //get the year from the date of each invoice
                 const year = el.date.toString().trim().substring(6,10);
+                //if the is new add it to the years array
                 if(!this.years.some(searchYear => year === searchYear)){
                     this.years.push(year)
                 }
-
+                
+                //get the element position
                 const elementPos = result.map((x) => {return x.companyId; }).indexOf(el.companyId);
+                //if the company id already exists in the result array, add to the sum of the respective years
                 if(result.some(invoice => invoice.companyId === el.companyId)){
                     if(this.searchYear == parseInt(year)){
                         result[elementPos].price += el.price
@@ -190,31 +197,34 @@ export default{
                 
             }
 
-            //
-            
+            var companies = this.$store.getters.getCompanies;
             //Insert the unique companies into the Strapi database
-            result.forEach(element =>{
+            result.forEach((element) =>{
+                if(!companies.filter(e => e.CompanyId == element.companyId.toString()).length > 0){
+                    this.$store.dispatch("CREATE_COMPANY", {CompanyId: element.companyId.toString(), Address: element.address })
+                }
                 element.years.reverse()
-                this.$store.dispatch("CREATE_COMPANY", {CompanyId: element.companyId.toString(), Address: element.address })
+               //
             })
 
-            console.log(result)
-
-            
-
+            //set the companies for iteration
             this.companies = result;
-
+            
+            //set a filter on the results. The default is to filter by largest entries
             this.filterResults();
 
             
        },
        filterResults(){
+           //filter by smallest entries
            if(this.filter == "Mindste"){
                this.companies.sort((a,b) => a.price - b.price);
            }
+           //filter by largest
            if(this.filter == "Største"){
                this.companies.sort((a,b) => b.price - a.price);
            }
+           //filter by red entries
            if(this.filter == "Røde"){
                this.companies.sort((a) =>{
                    if(a.price < a.year2 && a.year2 < a.year1) return -1
@@ -223,7 +233,9 @@ export default{
          
        },
        searchFilter(){
+           //start out by sorting by out the invoice entries
            this.sortByYear();
+           //search entries by address
            this.companies = this.companies.filter(company => {
               return company.address.includes(this.search)
            })

@@ -34,7 +34,7 @@
         <div class="submit">
             <button class="submit__button" v-on:click="saveOffer()">Gem</button>
         </div>
-        <p v-if="!everythingFilled">Udfyld felterne med den røde stjerne</p>
+        <p class="newOffer__warning" v-if="!everythingFilled">Udfyld felterne med den røde stjerne</p>
 
     </div>
 </template>
@@ -55,7 +55,7 @@ export default{
 
         saveOffer(){
             var offer = {Title: this.title, Description: this.description, FromDate: this.fromDate, ToDate: this.toDate}//
-            console.log(offer)
+            
             if(this.title != "" && this.fromDate != "" && this.toDate != ""){
                 this.$store.dispatch("CREATE_OFFER", offer)
                 this.$emit("closeCreate")
